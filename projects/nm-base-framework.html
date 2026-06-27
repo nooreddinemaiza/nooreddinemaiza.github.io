@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NM Base Framework — Nooreddine Maiza</title>
-  <meta name="description" content="Framework PHP maison orienté objet : routeur interne, architecture MVC, autoloader PSR-4 — socle de tous les projets PHP de Nooreddine Maiza." />
+  <meta name="description"
+    content="Framework PHP maison orienté objet : routeur interne, architecture MVC, autoloader PSR-4 — socle de tous les projets PHP de Nooreddine Maiza." />
   <link rel="stylesheet" href="../css/style.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>" />
+  <link rel="icon" href="images/NM_logo.png" />
   <style>
     /* ── extras spécifiques ── */
     .code-block {
@@ -21,21 +23,50 @@
       margin-bottom: 2rem;
       position: relative;
     }
+
     .code-block .cb-label {
       position: absolute;
-      top: 10px; right: 14px;
+      top: 10px;
+      right: 14px;
       font-size: 0.65rem;
       color: var(--text-faint);
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    .code-block .kw  { color: #FF7B72; }   /* keyword     */
-    .code-block .cl  { color: #79C0FF; }   /* class/type  */
-    .code-block .fn  { color: #D2A8FF; }   /* function    */
-    .code-block .st  { color: #A5D6FF; }   /* string      */
-    .code-block .cm  { color: var(--text-faint); font-style:italic; }  /* comment */
-    .code-block .cy  { color: var(--cyan); }
-    .code-block .gr  { color: var(--green); }
+
+    .code-block .kw {
+      color: #FF7B72;
+    }
+
+    /* keyword     */
+    .code-block .cl {
+      color: #79C0FF;
+    }
+
+    /* class/type  */
+    .code-block .fn {
+      color: #D2A8FF;
+    }
+
+    /* function    */
+    .code-block .st {
+      color: #A5D6FF;
+    }
+
+    /* string      */
+    .code-block .cm {
+      color: var(--text-faint);
+      font-style: italic;
+    }
+
+    /* comment */
+    .code-block .cy {
+      color: var(--cyan);
+    }
+
+    .code-block .gr {
+      color: var(--green);
+    }
 
     .lifecycle-steps {
       display: flex;
@@ -44,22 +75,27 @@
       margin-bottom: 2.5rem;
       position: relative;
     }
+
     .lifecycle-steps::before {
       content: '';
       position: absolute;
       left: 19px;
-      top: 20px; bottom: 20px;
+      top: 20px;
+      bottom: 20px;
       width: 2px;
       background: linear-gradient(to bottom, var(--cyan), var(--violet));
     }
+
     .lifecycle-step {
       display: flex;
       gap: 1.2rem;
       align-items: flex-start;
       padding: 1rem 0;
     }
+
     .ls-num {
-      width: 40px; height: 40px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: var(--surface);
       border: 2px solid var(--cyan);
@@ -74,18 +110,25 @@
       position: relative;
       z-index: 1;
     }
-    .ls-content { flex: 1; padding-top: 6px; }
+
+    .ls-content {
+      flex: 1;
+      padding-top: 6px;
+    }
+
     .ls-title {
       font-family: var(--font-display);
       font-size: 0.92rem;
       font-weight: 600;
       margin-bottom: 4px;
     }
+
     .ls-desc {
       font-size: 0.83rem;
       color: var(--text-muted);
       line-height: 1.6;
     }
+
     .ls-code {
       display: inline-block;
       font-family: var(--font-mono);
@@ -109,24 +152,38 @@
       overflow-x: auto;
       line-height: 1.9;
     }
-    .arch-diagram .hl  { color: var(--cyan); }
-    .arch-diagram .hl2 { color: var(--violet); opacity: 0.9; }
-    .arch-diagram .hl3 { color: #3FB950; }
-    .arch-diagram .dim { color: var(--text-faint); }
+
+    .arch-diagram .hl {
+      color: var(--cyan);
+    }
+
+    .arch-diagram .hl2 {
+      color: var(--violet);
+      opacity: 0.9;
+    }
+
+    .arch-diagram .hl3 {
+      color: #3FB950;
+    }
+
+    .arch-diagram .dim {
+      color: var(--text-faint);
+    }
   </style>
 </head>
+
 <body>
 
   <!-- ===================================================
        NAVIGATION
        =================================================== -->
   <nav class="nav">
-    <a href="../index.html" class="nav-logo">NM<span>.</span></a>
+    <a href="#home" class="nav-logo"><img src="images/NM_logo.png" style="max-width: 55px;" alt="NM_logo"></a>
     <ul class="nav-links">
-      <li><a href="../index.html">Accueil</a></li>
-      <li><a href="../index.html#projects">Projets</a></li>
-      <li><a href="../index.html#about">À propos</a></li>
-      <li><a href="../index.html#contact" class="nav-cta">Contact</a></li>
+      <li><a href="#home" class="active">Accueil</a></li>
+      <li><a href="#projects">Projets</a></li>
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
     </ul>
     <div class="nav-burger" aria-label="Menu" role="button" tabindex="0">
       <span></span><span></span><span></span>
@@ -140,9 +197,9 @@
     <div class="project-hero">
 
       <a href="../index.html#projects" class="project-hero-back">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none"
-             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path d="M19 12H5M12 5l-7 7 7 7"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 5l-7 7 7 7" />
         </svg>
         Retour aux projets
       </a>
@@ -197,36 +254,36 @@
         <!-- Architecture -->
         <h2 class="project-section-title">Structure du framework</h2>
         <div class="arch-diagram">
-<span class="hl">nm-base-framework/</span>
-├── <span class="hl2">core/</span>                         <span class="dim">← Noyau du framework</span>
-│   ├── <span class="hl">Router.php</span>                <span class="dim">← Routeur interne (GET/POST/PUT/DELETE)</span>
-│   ├── <span class="hl">Controller.php</span>            <span class="dim">← Contrôleur de base (render, redirect…)</span>
-│   ├── <span class="hl">Model.php</span>                 <span class="dim">← Modèle de base (query builder léger)</span>
-│   ├── <span class="hl">Database.php</span>              <span class="dim">← Singleton PDO</span>
-│   ├── <span class="hl">Request.php</span>               <span class="dim">← Encapsulation $_GET/$_POST/$_FILES</span>
-│   ├── <span class="hl">Response.php</span>              <span class="dim">← JSON / redirect / status codes</span>
-│   ├── <span class="hl">Session.php</span>               <span class="dim">← Gestion sessions & flash messages</span>
-│   ├── <span class="hl">View.php</span>                  <span class="dim">← Moteur de templates PHP natif</span>
-│   ├── <span class="hl">Middleware.php</span>            <span class="dim">← Interface middleware (auth, csrf…)</span>
-│   └── <span class="hl">Autoloader.php</span>            <span class="dim">← PSR-4 sans Composer (optionnel)</span>
-│
-├── <span class="hl2">app/</span>                          <span class="dim">← Code applicatif (à surcharger)</span>
-│   ├── Controllers/
-│   ├── Models/
-│   ├── Views/
-│   │   ├── layouts/              <span class="dim">← Templates de base (header, footer)</span>
-│   │   └── partials/             <span class="dim">← Composants réutilisables</span>
-│   └── Middleware/
-│
-├── <span class="hl3">public/</span>
-│   ├── index.php                 <span class="dim">← Point d'entrée unique (Front Controller)</span>
-│   ├── .htaccess                 <span class="dim">← Réécriture URL Apache</span>
-│   ├── css/ js/ images/
-│
-└── <span class="hl">config/</span>
-    ├── app.php                   <span class="dim">← Config générale (env, debug, timezone)</span>
-    ├── database.php              <span class="dim">← DSN, host, user, pass, dbname</span>
-    └── routes.php                <span class="dim">← Déclaration de toutes les routes</span>
+          <span class="hl">nm-base-framework/</span>
+          ├── <span class="hl2">core/</span> <span class="dim">← Noyau du framework</span>
+          │ ├── <span class="hl">Router.php</span> <span class="dim">← Routeur interne (GET/POST/PUT/DELETE)</span>
+          │ ├── <span class="hl">Controller.php</span> <span class="dim">← Contrôleur de base (render, redirect…)</span>
+          │ ├── <span class="hl">Model.php</span> <span class="dim">← Modèle de base (query builder léger)</span>
+          │ ├── <span class="hl">Database.php</span> <span class="dim">← Singleton PDO</span>
+          │ ├── <span class="hl">Request.php</span> <span class="dim">← Encapsulation $_GET/$_POST/$_FILES</span>
+          │ ├── <span class="hl">Response.php</span> <span class="dim">← JSON / redirect / status codes</span>
+          │ ├── <span class="hl">Session.php</span> <span class="dim">← Gestion sessions & flash messages</span>
+          │ ├── <span class="hl">View.php</span> <span class="dim">← Moteur de templates PHP natif</span>
+          │ ├── <span class="hl">Middleware.php</span> <span class="dim">← Interface middleware (auth, csrf…)</span>
+          │ └── <span class="hl">Autoloader.php</span> <span class="dim">← PSR-4 sans Composer (optionnel)</span>
+          │
+          ├── <span class="hl2">app/</span> <span class="dim">← Code applicatif (à surcharger)</span>
+          │ ├── Controllers/
+          │ ├── Models/
+          │ ├── Views/
+          │ │ ├── layouts/ <span class="dim">← Templates de base (header, footer)</span>
+          │ │ └── partials/ <span class="dim">← Composants réutilisables</span>
+          │ └── Middleware/
+          │
+          ├── <span class="hl3">public/</span>
+          │ ├── index.php <span class="dim">← Point d'entrée unique (Front Controller)</span>
+          │ ├── .htaccess <span class="dim">← Réécriture URL Apache</span>
+          │ ├── css/ js/ images/
+          │
+          └── <span class="hl">config/</span>
+          ├── app.php <span class="dim">← Config générale (env, debug, timezone)</span>
+          ├── database.php <span class="dim">← DSN, host, user, pass, dbname</span>
+          └── routes.php <span class="dim">← Déclaration de toutes les routes</span>
         </div>
 
         <!-- Cycle de vie d'une requête -->
@@ -236,42 +293,53 @@
             <div class="ls-num">01</div>
             <div class="ls-content">
               <div class="ls-title">Front Controller</div>
-              <div class="ls-desc">Toutes les requêtes HTTP sont redirigées vers <span class="ls-code">public/index.php</span> grâce au <code style="font-size:0.8em;color:var(--violet);">.htaccess</code>. C'est le seul point d'entrée de l'application.</div>
+              <div class="ls-desc">Toutes les requêtes HTTP sont redirigées vers <span
+                  class="ls-code">public/index.php</span> grâce au <code
+                  style="font-size:0.8em;color:var(--violet);">.htaccess</code>. C'est le seul point d'entrée de
+                l'application.</div>
             </div>
           </div>
           <div class="lifecycle-step">
             <div class="ls-num">02</div>
             <div class="ls-content">
               <div class="ls-title">Bootstrap & Autoloader</div>
-              <div class="ls-desc">L'autoloader PSR-4 est enregistré, la configuration est chargée (<span class="ls-code">config/app.php</span>, <span class="ls-code">config/database.php</span>), la session est démarrée.</div>
+              <div class="ls-desc">L'autoloader PSR-4 est enregistré, la configuration est chargée (<span
+                  class="ls-code">config/app.php</span>, <span class="ls-code">config/database.php</span>), la session
+                est démarrée.</div>
             </div>
           </div>
           <div class="lifecycle-step">
             <div class="ls-num">03</div>
             <div class="ls-content">
               <div class="ls-title">Routeur</div>
-              <div class="ls-desc">Le <span class="ls-code">Router</span> compare l'URI et la méthode HTTP aux routes définies dans <span class="ls-code">config/routes.php</span> et résout le contrôleur + l'action cibles.</div>
+              <div class="ls-desc">Le <span class="ls-code">Router</span> compare l'URI et la méthode HTTP aux routes
+                définies dans <span class="ls-code">config/routes.php</span> et résout le contrôleur + l'action cibles.
+              </div>
             </div>
           </div>
           <div class="lifecycle-step">
             <div class="ls-num">04</div>
             <div class="ls-content">
               <div class="ls-title">Middlewares</div>
-              <div class="ls-desc">La pile de middlewares associée à la route est exécutée en séquence (auth, CSRF, rate-limiting…). Un middleware peut court-circuiter la chaîne et renvoyer directement une réponse.</div>
+              <div class="ls-desc">La pile de middlewares associée à la route est exécutée en séquence (auth, CSRF,
+                rate-limiting…). Un middleware peut court-circuiter la chaîne et renvoyer directement une réponse.</div>
             </div>
           </div>
           <div class="lifecycle-step">
             <div class="ls-num">05</div>
             <div class="ls-content">
               <div class="ls-title">Contrôleur → Modèle → Vue</div>
-              <div class="ls-desc">Le contrôleur instancie les modèles nécessaires, traite la logique métier, puis appelle <span class="ls-code">$this->render('vue', $data)</span> qui injecte les données dans le template PHP natif.</div>
+              <div class="ls-desc">Le contrôleur instancie les modèles nécessaires, traite la logique métier, puis
+                appelle <span class="ls-code">$this->render('vue', $data)</span> qui injecte les données dans le
+                template PHP natif.</div>
             </div>
           </div>
           <div class="lifecycle-step">
             <div class="ls-num" style="border-color:var(--green);color:var(--green);">06</div>
             <div class="ls-content">
               <div class="ls-title">Réponse HTTP</div>
-              <div class="ls-desc">La classe <span class="ls-code">Response</span> envoie les headers appropriés (Content-Type, status code) et renvoie le HTML, le JSON ou effectue une redirection.</div>
+              <div class="ls-desc">La classe <span class="ls-code">Response</span> envoie les headers appropriés
+                (Content-Type, status code) et renvoie le HTML, le JSON ou effectue une redirection.</div>
             </div>
           </div>
         </div>
@@ -279,78 +347,112 @@
         <!-- Exemples de code -->
         <h2 class="project-section-title">Exemples de code</h2>
 
-        <p class="project-text" style="margin-bottom:0.8rem;">Déclaration des routes dans <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">config/routes.php</code> :</p>
+        <p class="project-text" style="margin-bottom:0.8rem;">Déclaration des routes dans <code
+            style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">config/routes.php</code> :</p>
         <div class="code-block">
           <span class="cb-label">config/routes.php</span>
-<span class="cm">// Déclaration des routes de l'application</span>
-<span class="kw">use</span> <span class="cl">Core\Router</span>;
+          <span class="cm">// Déclaration des routes de l'application</span>
+          <span class="kw">use</span> <span class="cl">Core\Router</span>;
 
-<span class="cl">Router</span>::<span class="fn">get</span>(<span class="st">'/'</span>, <span class="st">'HomeController@index'</span>);
-<span class="cl">Router</span>::<span class="fn">get</span>(<span class="st">'/users'</span>, <span class="st">'UserController@index'</span>, [<span class="st">'auth'</span>]);
-<span class="cl">Router</span>::<span class="fn">get</span>(<span class="st">'/users/{id}'</span>, <span class="st">'UserController@show'</span>, [<span class="st">'auth'</span>]);
-<span class="cl">Router</span>::<span class="fn">post</span>(<span class="st">'/users'</span>, <span class="st">'UserController@store'</span>, [<span class="st">'auth'</span>, <span class="st">'csrf'</span>]);
-<span class="cl">Router</span>::<span class="fn">put</span>(<span class="st">'/users/{id}'</span>, <span class="st">'UserController@update'</span>, [<span class="st">'auth'</span>, <span class="st">'csrf'</span>]);
-<span class="cl">Router</span>::<span class="fn">delete</span>(<span class="st">'/users/{id}'</span>, <span class="st">'UserController@destroy'</span>, [<span class="st">'auth'</span>]);
+          <span class="cl">Router</span>::<span class="fn">get</span>(<span class="st">'/'</span>, <span
+            class="st">'HomeController@index'</span>);
+          <span class="cl">Router</span>::<span class="fn">get</span>(<span class="st">'/users'</span>, <span
+            class="st">'UserController@index'</span>, [<span class="st">'auth'</span>]);
+          <span class="cl">Router</span>::<span class="fn">get</span>(<span class="st">'/users/{id}'</span>, <span
+            class="st">'UserController@show'</span>, [<span class="st">'auth'</span>]);
+          <span class="cl">Router</span>::<span class="fn">post</span>(<span class="st">'/users'</span>, <span
+            class="st">'UserController@store'</span>, [<span class="st">'auth'</span>, <span class="st">'csrf'</span>]);
+          <span class="cl">Router</span>::<span class="fn">put</span>(<span class="st">'/users/{id}'</span>, <span
+            class="st">'UserController@update'</span>, [<span class="st">'auth'</span>, <span
+            class="st">'csrf'</span>]);
+          <span class="cl">Router</span>::<span class="fn">delete</span>(<span class="st">'/users/{id}'</span>, <span
+            class="st">'UserController@destroy'</span>, [<span class="st">'auth'</span>]);
         </div>
 
         <p class="project-text" style="margin-bottom:0.8rem;">Exemple d'un contrôleur héritant de la base :</p>
         <div class="code-block">
           <span class="cb-label">app/Controllers/UserController.php</span>
-<span class="kw">namespace</span> <span class="cl">App\Controllers</span>;
+          <span class="kw">namespace</span> <span class="cl">App\Controllers</span>;
 
-<span class="kw">use</span> <span class="cl">Core\Controller</span>;
-<span class="kw">use</span> <span class="cl">App\Models\User</span>;
+          <span class="kw">use</span> <span class="cl">Core\Controller</span>;
+          <span class="kw">use</span> <span class="cl">App\Models\User</span>;
 
-<span class="kw">class</span> <span class="cl">UserController</span> <span class="kw">extends</span> <span class="cl">Controller</span>
-{
-    <span class="kw">public function</span> <span class="fn">index</span>(): <span class="cl">void</span>
-    {
-        <span class="cy">$users</span> = <span class="cl">User</span>::<span class="fn">all</span>();
-        <span class="cm">// Rend la vue resources/views/users/index.php</span>
-        <span class="kw">$this</span>-><span class="fn">render</span>(<span class="st">'users/index'</span>, <span class="kw">compact</span>(<span class="st">'users'</span>));
-    }
+          <span class="kw">class</span> <span class="cl">UserController</span> <span class="kw">extends</span> <span
+            class="cl">Controller</span>
+          {
+          <span class="kw">public function</span> <span class="fn">index</span>(): <span class="cl">void</span>
+          {
+          <span class="cy">$users</span> = <span class="cl">User</span>::<span class="fn">all</span>();
+          <span class="cm">// Rend la vue resources/views/users/index.php</span>
+          <span class="kw">$this</span>-><span class="fn">render</span>(<span class="st">'users/index'</span>, <span
+            class="kw">compact</span>(<span class="st">'users'</span>));
+          }
 
-    <span class="kw">public function</span> <span class="fn">store</span>(): <span class="cl">void</span>
-    {
-        <span class="cy">$data</span> = <span class="kw">$this</span>->request-><span class="fn">only</span>([<span class="st">'username'</span>, <span class="st">'password'</span>, <span class="st">'email'</span>]);
-        <span class="cl">User</span>::<span class="fn">create</span>(<span class="cy">$data</span>);
-        <span class="kw">$this</span>->session-><span class="fn">flash</span>(<span class="st">'success'</span>, <span class="st">'Utilisateur créé.'</span>);
-        <span class="kw">$this</span>-><span class="fn">redirect</span>(<span class="st">'/users'</span>);
-    }
-}
+          <span class="kw">public function</span> <span class="fn">store</span>(): <span class="cl">void</span>
+          {
+          <span class="cy">$data</span> = <span class="kw">$this</span>->request-><span class="fn">only</span>([<span
+            class="st">'username'</span>, <span class="st">'password'</span>, <span class="st">'email'</span>]);
+          <span class="cl">User</span>::<span class="fn">create</span>(<span class="cy">$data</span>);
+          <span class="kw">$this</span>->session-><span class="fn">flash</span>(<span class="st">'success'</span>, <span
+            class="st">'Utilisateur créé.'</span>);
+          <span class="kw">$this</span>-><span class="fn">redirect</span>(<span class="st">'/users'</span>);
+          }
+          }
         </div>
 
         <p class="project-text" style="margin-bottom:0.8rem;">Modèle de base avec query builder léger :</p>
         <div class="code-block">
           <span class="cb-label">app/Models/User.php</span>
-<span class="kw">namespace</span> <span class="cl">App\Models</span>;
+          <span class="kw">namespace</span> <span class="cl">App\Models</span>;
 
-<span class="kw">use</span> <span class="cl">Core\Model</span>;
+          <span class="kw">use</span> <span class="cl">Core\Model</span>;
 
-<span class="kw">class</span> <span class="cl">User</span> <span class="kw">extends</span> <span class="cl">Model</span>
-{
-    <span class="kw">protected static</span> <span class="cl">string</span> <span class="cy">$table</span> = <span class="st">'users'</span>;
+          <span class="kw">class</span> <span class="cl">User</span> <span class="kw">extends</span> <span
+            class="cl">Model</span>
+          {
+          <span class="kw">protected static</span> <span class="cl">string</span> <span class="cy">$table</span> = <span
+            class="st">'users'</span>;
 
-    <span class="cm">// Core\Model fournit : all(), find(), where(), create(), update(), delete()</span>
-    <span class="cm">// Méthode personnalisée :</span>
-    <span class="kw">public static function</span> <span class="fn">findByEmail</span>(<span class="cl">string</span> <span class="cy">$email</span>): ?<span class="kw">self</span>
-    {
-        <span class="kw">return</span> <span class="kw">static</span>::<span class="fn">where</span>(<span class="st">'email'</span>, <span class="cy">$email</span>)-><span class="fn">first</span>();
-    }
-}
+          <span class="cm">// Core\Model fournit : all(), find(), where(), create(), update(), delete()</span>
+          <span class="cm">// Méthode personnalisée :</span>
+          <span class="kw">public static function</span> <span class="fn">findByEmail</span>(<span
+            class="cl">string</span> <span class="cy">$email</span>): ?<span class="kw">self</span>
+          {
+          <span class="kw">return</span> <span class="kw">static</span>::<span class="fn">where</span>(<span
+            class="st">'email'</span>, <span class="cy">$email</span>)-><span class="fn">first</span>();
+          }
+          }
         </div>
 
         <!-- Fonctionnalités -->
         <h2 class="project-section-title">Ce que fournit le framework</h2>
         <div class="feature-list">
-          <div class="feature-item">Routeur interne supportant GET, POST, PUT, DELETE avec paramètres dynamiques dans l'URI (<code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">{id}</code>, <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">{slug}</code>).</div>
-          <div class="feature-item">Système de middlewares en pipeline : chaque route peut embarquer une liste de middlewares exécutés avant l'action du contrôleur.</div>
-          <div class="feature-item">Moteur de vues en PHP natif avec layouts et partials — pas de langage de template externe, juste du PHP.</div>
-          <div class="feature-item">Couche Model avec méthodes statiques (<code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">all()</code>, <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">find()</code>, <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">where()</code>, <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">create()</code>, <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">update()</code>, <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">delete()</code>) via PDO préparé.</div>
-          <div class="feature-item">Singleton PDO partagé dans toute l'application, configurable par environnement.</div>
-          <div class="feature-item">Gestion des sessions avec flash messages (succès, erreurs) accessibles dans les vues.</div>
-          <div class="feature-item">Classe Request pour accéder proprement aux données entrantes (<code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">only()</code>, <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">get()</code>, <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">post()</code>, <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">file()</code>).</div>
-          <div class="feature-item">Autoloader PSR-4 intégré — utilisable avec ou sans Composer selon le contexte de déploiement.</div>
+          <div class="feature-item">Routeur interne supportant GET, POST, PUT, DELETE avec paramètres dynamiques dans
+            l'URI (<code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">{id}</code>, <code
+              style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">{slug}</code>).</div>
+          <div class="feature-item">Système de middlewares en pipeline : chaque route peut embarquer une liste de
+            middlewares exécutés avant l'action du contrôleur.</div>
+          <div class="feature-item">Moteur de vues en PHP natif avec layouts et partials — pas de langage de template
+            externe, juste du PHP.</div>
+          <div class="feature-item">Couche Model avec méthodes statiques (<code
+              style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">all()</code>, <code
+              style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">find()</code>, <code
+              style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">where()</code>, <code
+              style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">create()</code>, <code
+              style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">update()</code>, <code
+              style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">delete()</code>) via PDO préparé.
+          </div>
+          <div class="feature-item">Singleton PDO partagé dans toute l'application, configurable par environnement.
+          </div>
+          <div class="feature-item">Gestion des sessions avec flash messages (succès, erreurs) accessibles dans les
+            vues.</div>
+          <div class="feature-item">Classe Request pour accéder proprement aux données entrantes (<code
+              style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">only()</code>, <code
+              style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">get()</code>, <code
+              style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">post()</code>, <code
+              style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">file()</code>).</div>
+          <div class="feature-item">Autoloader PSR-4 intégré — utilisable avec ou sans Composer selon le contexte de
+            déploiement.</div>
         </div>
 
       </main>
@@ -414,28 +516,29 @@
         <div class="sidebar-card">
           <div class="sidebar-card-title">Projets construits dessus</div>
           <a href="nm-network-access-manager.html"
-             style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--border);color:var(--text-muted);font-size:0.85rem;transition:color var(--transition);"
-             onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-muted)'">
+            style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--border);color:var(--text-muted);font-size:0.85rem;transition:color var(--transition);"
+            onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-muted)'">
             🔐 &nbsp;NM Network Access Manager
           </a>
           <a href="../index.html#projects"
-             style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--border);color:var(--text-muted);font-size:0.85rem;transition:color var(--transition);"
-             onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-muted)'">
+            style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--border);color:var(--text-muted);font-size:0.85rem;transition:color var(--transition);"
+            onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-muted)'">
             🛒 &nbsp;E-Commerce Bootstrap
           </a>
           <a href="../index.html#projects"
-             style="display:flex;align-items:center;gap:8px;padding:10px 0;color:var(--text-muted);font-size:0.85rem;transition:color var(--transition);"
-             onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-muted)'">
+            style="display:flex;align-items:center;gap:8px;padding:10px 0;color:var(--text-muted);font-size:0.85rem;transition:color var(--transition);"
+            onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-muted)'">
             🛍️ &nbsp;E-Commerce Tailwind
           </a>
         </div>
 
         <div class="sidebar-card">
           <div class="sidebar-card-title">Liens</div>
-          <a href="https://github.com/nooreddinemaiza" target="_blank" rel="noopener"
-             class="social-link" style="width:100%; justify-content:center;">
+          <a href="https://github.com/nooreddinemaiza" target="_blank" rel="noopener" class="social-link"
+            style="width:100%; justify-content:center;">
             <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              <path
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
             </svg>
             Voir sur GitHub
           </a>
@@ -457,4 +560,5 @@
 
   <script src="../js/main.js"></script>
 </body>
+
 </html>
