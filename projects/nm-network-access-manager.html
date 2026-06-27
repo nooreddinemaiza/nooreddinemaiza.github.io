@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NM Network Access Manager — Nooreddine Maiza</title>
+  <meta name="description" content="Plateforme web de gestion d'accès réseau basée sur FreeRADIUS. Administration centralisée des utilisateurs, politiques AAA et sessions NAS." />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>" />
+  <style>
+    /* ── extras spécifiques à la page projet ── */
+    .arch-diagram {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      overflow-x: auto;
+      line-height: 1.9;
+    }
+    .arch-diagram .hl  { color: var(--cyan); }
+    .arch-diagram .hl2 { color: var(--violet); opacity: 0.9; }
+    .arch-diagram .hl3 { color: #3FB950; }
+
+    .screens-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .screen-mock {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .screen-mock-bar {
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .screen-mock-bar span {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .screen-mock-bar span:nth-child(1) { background: #FF5F57; }
+    .screen-mock-bar span:nth-child(2) { background: #FFBD2E; }
+    .screen-mock-bar span:nth-child(3) { background: #28C840; }
+    .screen-mock-bar .url {
+      margin-left: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-faint);
+    }
+    .screen-mock-body {
+      padding: 1.2rem;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .mock-row {
+      height: 10px;
+      border-radius: 3px;
+      background: var(--surface-2);
+    }
+    .mock-row.cyan  { background: var(--cyan-dim); border: 1px solid var(--cyan); width: 40%; height: 22px; border-radius: var(--radius-sm); }
+    .mock-row.short { width: 55%; }
+    .mock-row.xshort{ width: 35%; }
+    .mock-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4px;
+      margin-top: 6px;
+    }
+    .mock-cell {
+      height: 8px;
+      background: var(--surface-2);
+      border-radius: 2px;
+    }
+    .mock-cell.head { background: rgba(0,180,216,0.15); }
+    .screen-label {
+      padding: 8px 12px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-faint);
+      border-top: 1px solid var(--border);
+    }
+
+    .radius-flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .flow-node {
+      flex: 1;
+      min-width: 120px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-align: center;
+    }
+    .flow-node .fn-icon { font-size: 1.5rem; margin-bottom: 6px; }
+    .flow-node .fn-title {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .flow-node .fn-sub {
+      font-size: 0.7rem;
+      color: var(--text-faint);
+      font-family: var(--font-mono);
+    }
+    .flow-arrow {
+      color: var(--cyan);
+      font-size: 1.2rem;
+      padding: 0 0.5rem;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .screens-grid { grid-template-columns: 1fr; }
+      .radius-flow { flex-direction: column; }
+      .flow-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================================================
+       NAVIGATION
+       =================================================== -->
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">NM<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="../index.html#projects">Projets</a></li>
+      <li><a href="../index.html#about">À propos</a></li>
+      <li><a href="../index.html#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <div class="nav-burger" aria-label="Menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ===================================================
+       PROJECT HERO
+       =================================================== -->
+  <div class="project-page">
+    <div class="project-hero">
+
+      <a href="../index.html#projects" class="project-hero-back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none"
+             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 5l-7 7 7 7"/>
+        </svg>
+        Retour aux projets
+      </a>
+
+      <div class="section-label">Projet réseau &amp; web</div>
+
+      <h1 class="project-hero-title">NM Network Access Manager</h1>
+
+      <p class="project-hero-desc">
+        Interface web de gestion centralisée d'un serveur FreeRADIUS. Permet
+        d'administrer les utilisateurs, les groupes, les politiques AAA et de
+        consulter les sessions actives — sans toucher aux fichiers de configuration
+        ou à la base de données directement.
+      </p>
+
+      <div class="card-tags" style="margin-bottom: 1.5rem;">
+        <span class="tag tag-cyan">PHP OOP</span>
+        <span class="tag tag-violet">FreeRADIUS</span>
+        <span class="tag tag-orange">MySQL</span>
+        <span class="tag tag-yellow">Bootstrap</span>
+        <span class="tag tag-green">RADIUS Protocol</span>
+      </div>
+
+      <div class="project-hero-meta">
+        <div class="project-meta-item">
+          <span class="label">Catégorie</span>
+          <span class="value">Administration réseau</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="label">Stack</span>
+          <span class="value">PHP OOP · MySQL · Bootstrap</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="label">Protocole</span>
+          <span class="value">RADIUS (RFC 2865)</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="label">Statut</span>
+          <span class="value" style="color:var(--green);">● Actif</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===================================================
+         PROJECT BODY
+         =================================================== -->
+    <div class="project-body">
+
+      <!-- ── MAIN CONTENT ── -->
+      <main>
+
+        <!-- Aperçus maquettes -->
+        <h2 class="project-section-title">Aperçu de l'interface</h2>
+        <div class="screens-grid">
+
+          <div class="screen-mock">
+            <div class="screen-mock-bar">
+              <span></span><span></span><span></span>
+              <span class="url">nm-nam/dashboard</span>
+            </div>
+            <div class="screen-mock-body">
+              <div class="mock-row cyan"></div>
+              <div class="mock-row" style="width:80%; height:6px; margin-top:8px;"></div>
+              <div class="mock-table">
+                <div class="mock-cell head"></div>
+                <div class="mock-cell head"></div>
+                <div class="mock-cell head"></div>
+                <div class="mock-cell"></div>
+                <div class="mock-cell"></div>
+                <div class="mock-cell"></div>
+                <div class="mock-cell"></div>
+                <div class="mock-cell"></div>
+                <div class="mock-cell"></div>
+                <div class="mock-cell"></div>
+                <div class="mock-cell"></div>
+                <div class="mock-cell"></div>
+              </div>
+            </div>
+            <div class="screen-label">Dashboard — Sessions actives</div>
+          </div>
+
+          <div class="screen-mock">
+            <div class="screen-mock-bar">
+              <span></span><span></span><span></span>
+              <span class="url">nm-nam/users</span>
+            </div>
+            <div class="screen-mock-body">
+              <div style="display:flex; gap:6px; align-items:center; margin-bottom:10px;">
+                <div class="mock-row" style="width:30%; height:14px; border-radius:4px;"></div>
+                <div style="flex:1"></div>
+                <div class="mock-row cyan" style="width:22%; height:14px;"></div>
+              </div>
+              <div class="mock-row short"></div>
+              <div class="mock-row xshort"></div>
+              <div class="mock-row short"></div>
+              <div class="mock-row xshort"></div>
+              <div class="mock-row short"></div>
+            </div>
+            <div class="screen-label">Gestion des utilisateurs RADIUS</div>
+          </div>
+
+          <div class="screen-mock">
+            <div class="screen-mock-bar">
+              <span></span><span></span><span></span>
+              <span class="url">nm-nam/nas</span>
+            </div>
+            <div class="screen-mock-body">
+              <div class="mock-row" style="width:90%; height:6px;"></div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+                <div style="background:var(--surface-2); border-radius:6px; padding:10px;">
+                  <div class="mock-row" style="width:60%; height:6px; margin-bottom:6px;"></div>
+                  <div class="mock-row cyan" style="width:80%; height:12px;"></div>
+                </div>
+                <div style="background:var(--surface-2); border-radius:6px; padding:10px;">
+                  <div class="mock-row" style="width:60%; height:6px; margin-bottom:6px;"></div>
+                  <div class="mock-row" style="width:80%; height:12px; background:rgba(124,58,237,0.15); border:1px solid #6D28D9; border-radius:var(--radius-sm);"></div>
+                </div>
+              </div>
+            </div>
+            <div class="screen-label">Équipements NAS enregistrés</div>
+          </div>
+
+          <div class="screen-mock">
+            <div class="screen-mock-bar">
+              <span></span><span></span><span></span>
+              <span class="url">nm-nam/policies</span>
+            </div>
+            <div class="screen-mock-body">
+              <div class="mock-row" style="width:55%; height:6px;"></div>
+              <div style="margin-top:10px; display:flex; flex-direction:column; gap:6px;">
+                <div style="display:flex; gap:6px; align-items:center;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:var(--cyan);flex-shrink:0;"></div>
+                  <div class="mock-row" style="width:70%; height:7px;"></div>
+                </div>
+                <div style="display:flex; gap:6px; align-items:center;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#3FB950;flex-shrink:0;"></div>
+                  <div class="mock-row" style="width:55%; height:7px;"></div>
+                </div>
+                <div style="display:flex; gap:6px; align-items:center;">
+                  <div style="width:10px;height:10px;border-radius:50%;background:#F97316;flex-shrink:0;"></div>
+                  <div class="mock-row" style="width:65%; height:7px;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="screen-label">Politiques d'accès (check / reply attrs)</div>
+          </div>
+
+        </div>
+
+        <!-- Flux RADIUS -->
+        <h2 class="project-section-title">Flux d'authentification RADIUS</h2>
+        <div class="radius-flow">
+          <div class="flow-node">
+            <div class="fn-icon">💻</div>
+            <div class="fn-title">Client</div>
+            <div class="fn-sub">Supplicant</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node" style="border-color: var(--cyan);">
+            <div class="fn-icon">📡</div>
+            <div class="fn-title">NAS / AP</div>
+            <div class="fn-sub">Access-Request</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node" style="border-color: var(--violet);">
+            <div class="fn-icon">🔐</div>
+            <div class="fn-title">FreeRADIUS</div>
+            <div class="fn-sub">AAA Server</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node" style="border-color: #3FB950;">
+            <div class="fn-icon">🗄️</div>
+            <div class="fn-title">MySQL</div>
+            <div class="fn-sub">radcheck / radreply</div>
+          </div>
+          <div class="flow-arrow" style="transform:rotate(180deg);">→</div>
+          <div class="flow-node">
+            <div class="fn-icon">🌐</div>
+            <div class="fn-title">NM NAM</div>
+            <div class="fn-sub">Interface web</div>
+          </div>
+        </div>
+
+        <!-- Architecture schéma ASCII -->
+        <h2 class="project-section-title">Architecture de l'application</h2>
+        <div class="arch-diagram">
+<span class="hl">nm-network-access-manager/</span>
+├── <span class="hl2">app/</span>
+│   ├── Controllers/
+│   │   ├── <span class="hl">UserController.php</span>        <span style="color:var(--text-faint);">← CRUD utilisateurs RADIUS</span>
+│   │   ├── <span class="hl">NasController.php</span>         <span style="color:var(--text-faint);">← Gestion équipements NAS</span>
+│   │   ├── <span class="hl">PolicyController.php</span>      <span style="color:var(--text-faint);">← Check / Reply attributes</span>
+│   │   ├── <span class="hl">SessionController.php</span>     <span style="color:var(--text-faint);">← Sessions actives / historique</span>
+│   │   └── <span class="hl">DashboardController.php</span>   <span style="color:var(--text-faint);">← Statistiques globales</span>
+│   ├── Models/
+│   │   ├── <span class="hl2">RadiusUser.php</span>            <span style="color:var(--text-faint);">← radcheck / radreply / radusergroup</span>
+│   │   ├── <span class="hl2">Nas.php</span>
+│   │   └── <span class="hl2">Accounting.php</span>            <span style="color:var(--text-faint);">← radacct</span>
+│   └── Views/
+│       ├── dashboard/
+│       ├── users/
+│       ├── nas/
+│       ├── policies/
+│       └── sessions/
+├── <span class="hl3">core/</span>                            <span style="color:var(--text-faint);">← NM Base Framework</span>
+│   ├── Router.php
+│   ├── Controller.php
+│   ├── Model.php
+│   └── Database.php
+├── <span class="hl">public/</span>
+│   └── index.php                  <span style="color:var(--text-faint);">← Point d'entrée unique</span>
+└── config/
+    └── radius.php                 <span style="color:var(--text-faint);">← Connexion DB FreeRADIUS</span>
+        </div>
+
+        <!-- Fonctionnalités -->
+        <h2 class="project-section-title">Fonctionnalités principales</h2>
+        <div class="feature-list">
+          <div class="feature-item">Gestion complète des utilisateurs RADIUS : création, modification, suppression, réinitialisation de mot de passe.</div>
+          <div class="feature-item">Gestion des attributs <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">radcheck</code> et <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">radreply</code> : quotas, bande passante, VLAN assigné, durée de session.</div>
+          <div class="feature-item">Organisation des utilisateurs en groupes avec politiques héritées (<code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">radusergroup</code>, <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">radgroupcheck</code>).</div>
+          <div class="feature-item">Enregistrement et administration des équipements NAS (routeurs, switchs, points d'accès) avec secret partagé.</div>
+          <div class="feature-item">Consultation en temps réel des sessions actives depuis la table <code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">radacct</code> avec possibilité de déconnexion (CoA / DM).</div>
+          <div class="feature-item">Historique des connexions avec filtres par utilisateur, NAS, date et statut (Accept / Reject).</div>
+          <div class="feature-item">Dashboard avec statistiques : sessions actives, authentifications réussies/échouées, top utilisateurs, graphes de consommation.</div>
+          <div class="feature-item">Authentification admin sécurisée, rôles et permissions sur les modules.</div>
+        </div>
+
+        <!-- Défis techniques -->
+        <h2 class="project-section-title">Points techniques notables</h2>
+        <p class="project-text">
+          Le principal défi était d'abstraire le schéma de base de données de FreeRADIUS
+          (tables <em>radcheck</em>, <em>radreply</em>, <em>radusergroup</em>, <em>radacct</em>…)
+          en une couche modèle cohérente, manipulable depuis l'interface sans connaître
+          le détail du schéma. Le routeur interne du <em>NM Base Framework</em> gère
+          toutes les routes en un seul point d'entrée (<code style="font-family:var(--font-mono);color:var(--cyan);font-size:0.82em;">public/index.php</code>),
+          ce qui simplifie la sécurisation des accès par middleware avant chaque
+          contrôleur.
+        </p>
+        <p class="project-text">
+          La gestion des attributs RADIUS est particulièrement flexible : l'interface
+          permet d'ajouter n'importe quel attribut standard (Framed-IP-Address,
+          Session-Timeout, WISPr-Bandwidth-Max-Down, etc.) sans modifier le code —
+          ils sont gérés comme des entrées dynamiques en base.
+        </p>
+
+      </main>
+
+      <!-- ── SIDEBAR ── -->
+      <aside class="project-sidebar">
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Stack technique</div>
+          <div class="tech-stack-item"><div class="tech-dot"></div>PHP 8.x (OOP)</div>
+          <div class="tech-stack-item"><div class="tech-dot" style="background:var(--violet);"></div>FreeRADIUS 3.x</div>
+          <div class="tech-stack-item"><div class="tech-dot" style="background:#F97316;"></div>MySQL / MariaDB</div>
+          <div class="tech-stack-item"><div class="tech-dot" style="background:#FBBF24;"></div>Bootstrap 5</div>
+          <div class="tech-stack-item"><div class="tech-dot" style="background:#FBBF24;"></div>jQuery</div>
+          <div class="tech-stack-item"><div class="tech-dot" style="background:var(--green);"></div>NM Base Framework</div>
+          <div class="tech-stack-item"><div class="tech-dot" style="background:var(--text-faint);"></div>Apache / Nginx</div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Tables RADIUS utilisées</div>
+          <div class="tech-stack-item">
+            <div class="tech-dot" style="background:var(--cyan);"></div>
+            <div>
+              <div style="font-size:0.82rem;color:var(--text);">radcheck</div>
+              <div style="font-size:0.72rem;color:var(--text-faint);">Conditions d'accès</div>
+            </div>
+          </div>
+          <div class="tech-stack-item">
+            <div class="tech-dot" style="background:var(--cyan);"></div>
+            <div>
+              <div style="font-size:0.82rem;color:var(--text);">radreply</div>
+              <div style="font-size:0.72rem;color:var(--text-faint);">Attributs de réponse</div>
+            </div>
+          </div>
+          <div class="tech-stack-item">
+            <div class="tech-dot" style="background:var(--violet);"></div>
+            <div>
+              <div style="font-size:0.82rem;color:var(--text);">radusergroup</div>
+              <div style="font-size:0.72rem;color:var(--text-faint);">Association user/groupe</div>
+            </div>
+          </div>
+          <div class="tech-stack-item">
+            <div class="tech-dot" style="background:var(--violet);"></div>
+            <div>
+              <div style="font-size:0.82rem;color:var(--text);">radgroupcheck / reply</div>
+              <div style="font-size:0.72rem;color:var(--text-faint);">Politiques de groupe</div>
+            </div>
+          </div>
+          <div class="tech-stack-item">
+            <div class="tech-dot" style="background:#F97316;"></div>
+            <div>
+              <div style="font-size:0.82rem;color:var(--text);">radacct</div>
+              <div style="font-size:0.72rem;color:var(--text-faint);">Sessions & accounting</div>
+            </div>
+          </div>
+          <div class="tech-stack-item">
+            <div class="tech-dot" style="background:#3FB950;"></div>
+            <div>
+              <div style="font-size:0.82rem;color:var(--text);">nas</div>
+              <div style="font-size:0.72rem;color:var(--text-faint);">Équipements NAS</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Liens</div>
+          <a href="https://github.com/nooreddinemaiza" target="_blank" rel="noopener"
+             class="social-link" style="margin-bottom:0.5rem; width:100%; justify-content:center;">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+            Voir sur GitHub
+          </a>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Autres projets</div>
+          <a href="nm-base-framework.html" style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);color:var(--text-muted);font-size:0.85rem;transition:color var(--transition);"
+             onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-muted)'">
+            ⚙️ &nbsp;NM Base Framework
+          </a>
+          <a href="../index.html#projects" style="display:flex;align-items:center;gap:8px;padding:8px 0;color:var(--text-muted);font-size:0.85rem;transition:color var(--transition);"
+             onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--text-muted)'">
+            🛒 &nbsp;Projets E-Commerce
+          </a>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       FOOTER
+       =================================================== -->
+  <footer>
+    <span>© 2025 Nooreddine Maiza — Safi, Maroc</span>
+    <span>
+      <a href="../index.html">← Retour au portfolio</a>
+    </span>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
