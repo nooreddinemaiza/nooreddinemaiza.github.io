@@ -288,38 +288,6 @@
           </div>
         </div>
 
-        <!-- Architecture schéma ASCII -->
-        <h2 class="project-section-title">Architecture de l'application</h2>
-        <div class="arch-diagram">
-<span class="hl">nm-network-access-manager/</span>
-├── <span class="hl2">app/</span>
-│   ├── Controllers/
-│   │   ├── <span class="hl">UserController.php</span>        <span style="color:var(--text-faint);">← CRUD utilisateurs RADIUS</span>
-│   │   ├── <span class="hl">NasController.php</span>         <span style="color:var(--text-faint);">← Gestion équipements NAS</span>
-│   │   ├── <span class="hl">PolicyController.php</span>      <span style="color:var(--text-faint);">← Check / Reply attributes</span>
-│   │   ├── <span class="hl">SessionController.php</span>     <span style="color:var(--text-faint);">← Sessions actives / historique</span>
-│   │   └── <span class="hl">DashboardController.php</span>   <span style="color:var(--text-faint);">← Statistiques globales</span>
-│   ├── Models/
-│   │   ├── <span class="hl2">RadiusUser.php</span>            <span style="color:var(--text-faint);">← radcheck / radreply / radusergroup</span>
-│   │   ├── <span class="hl2">Nas.php</span>
-│   │   └── <span class="hl2">Accounting.php</span>            <span style="color:var(--text-faint);">← radacct</span>
-│   └── Views/
-│       ├── dashboard/
-│       ├── users/
-│       ├── nas/
-│       ├── policies/
-│       └── sessions/
-├── <span class="hl3">core/</span>                            <span style="color:var(--text-faint);">← NM Base Framework</span>
-│   ├── Router.php
-│   ├── Controller.php
-│   ├── Model.php
-│   └── Database.php
-├── <span class="hl">public/</span>
-│   └── index.php                  <span style="color:var(--text-faint);">← Point d'entrée unique</span>
-└── config/
-    └── radius.php                 <span style="color:var(--text-faint);">← Connexion DB FreeRADIUS</span>
-        </div>
-
         <!-- Fonctionnalités -->
         <h2 class="project-section-title">Fonctionnalités principales</h2>
         <div class="feature-list">
