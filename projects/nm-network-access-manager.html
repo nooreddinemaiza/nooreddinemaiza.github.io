@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="../css/style.css" />
       <link rel="icon" href="../images/NM_logo.png" />
   <style>
-    /* ── extras spécifiques à la page projet ── */
     .arch-diagram {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -60,11 +59,15 @@
       color: var(--text-faint);
     }
     .screen-mock-body {
-      padding: 1.2rem;
       min-height: 120px;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+    }
+    
+    .screen-mock-body img {
+      min-height: 120px;
+      max-height: max-content;
     }
     .mock-row {
       height: 10px;
@@ -137,10 +140,6 @@
   </style>
 </head>
 <body>
-
-  <!-- ===================================================
-       NAVIGATION
-       =================================================== -->
     <nav class="nav">
     <a href="../index.html" class="nav-logo"><img src="../images/NM_logo.png" style="max-width: 55px;" alt="NM_logo"></a>
     <ul class="nav-links">
@@ -153,10 +152,6 @@
       <span></span><span></span><span></span>
     </div>
   </nav>
-
-  <!-- ===================================================
-       PROJECT HERO
-       =================================================== -->
   <div class="project-page">
     <div class="project-hero">
 
@@ -207,109 +202,54 @@
       </div>
 
     </div>
-
-    <!-- ===================================================
-         PROJECT BODY
-         =================================================== -->
     <div class="project-body">
-
-      <!-- ── MAIN CONTENT ── -->
       <main>
-
-        <!-- Aperçus maquettes -->
         <h2 class="project-section-title">Aperçu de l'interface</h2>
         <div class="screens-grid">
-
           <div class="screen-mock">
             <div class="screen-mock-bar">
               <span></span><span></span><span></span>
-              <span class="url">nm-nam/dashboard</span>
             </div>
             <div class="screen-mock-body">
-              <div class="mock-row cyan"></div>
-              <div class="mock-row" style="width:80%; height:6px; margin-top:8px;"></div>
-              <div class="mock-table">
-                <div class="mock-cell head"></div>
-                <div class="mock-cell head"></div>
-                <div class="mock-cell head"></div>
-                <div class="mock-cell"></div>
-                <div class="mock-cell"></div>
-                <div class="mock-cell"></div>
-                <div class="mock-cell"></div>
-                <div class="mock-cell"></div>
-                <div class="mock-cell"></div>
-                <div class="mock-cell"></div>
-                <div class="mock-cell"></div>
-                <div class="mock-cell"></div>
-              </div>
+              <img src="../images/nm-network-access-manager-image1.png" alt="">
             </div>
-            <div class="screen-label">Dashboard — Sessions actives</div>
+            <div class="screen-label">Dashboard</div>
           </div>
-
           <div class="screen-mock">
             <div class="screen-mock-bar">
               <span></span><span></span><span></span>
-              <span class="url">nm-nam/users</span>
             </div>
             <div class="screen-mock-body">
-              <div style="display:flex; gap:6px; align-items:center; margin-bottom:10px;">
-                <div class="mock-row" style="width:30%; height:14px; border-radius:4px;"></div>
-                <div style="flex:1"></div>
-                <div class="mock-row cyan" style="width:22%; height:14px;"></div>
-              </div>
-              <div class="mock-row short"></div>
-              <div class="mock-row xshort"></div>
-              <div class="mock-row short"></div>
-              <div class="mock-row xshort"></div>
-              <div class="mock-row short"></div>
+              <img src="../images/nm-network-access-manager-image2.png" alt="">
             </div>
-            <div class="screen-label">Gestion des utilisateurs RADIUS</div>
+            <div class="screen-label">Utilisateurs</div>
           </div>
-
           <div class="screen-mock">
             <div class="screen-mock-bar">
               <span></span><span></span><span></span>
-              <span class="url">nm-nam/nas</span>
             </div>
             <div class="screen-mock-body">
-              <div class="mock-row" style="width:90%; height:6px;"></div>
-              <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
-                <div style="background:var(--surface-2); border-radius:6px; padding:10px;">
-                  <div class="mock-row" style="width:60%; height:6px; margin-bottom:6px;"></div>
-                  <div class="mock-row cyan" style="width:80%; height:12px;"></div>
-                </div>
-                <div style="background:var(--surface-2); border-radius:6px; padding:10px;">
-                  <div class="mock-row" style="width:60%; height:6px; margin-bottom:6px;"></div>
-                  <div class="mock-row" style="width:80%; height:12px; background:rgba(124,58,237,0.15); border:1px solid #6D28D9; border-radius:var(--radius-sm);"></div>
-                </div>
-              </div>
+              <img src="../images/nm-network-access-manager-image3.png" alt="">
             </div>
-            <div class="screen-label">Équipements NAS enregistrés</div>
+            <div class="screen-label">Liens d'invitation</div>
           </div>
-
           <div class="screen-mock">
             <div class="screen-mock-bar">
               <span></span><span></span><span></span>
-              <span class="url">nm-nam/policies</span>
             </div>
             <div class="screen-mock-body">
-              <div class="mock-row" style="width:55%; height:6px;"></div>
-              <div style="margin-top:10px; display:flex; flex-direction:column; gap:6px;">
-                <div style="display:flex; gap:6px; align-items:center;">
-                  <div style="width:10px;height:10px;border-radius:50%;background:var(--cyan);flex-shrink:0;"></div>
-                  <div class="mock-row" style="width:70%; height:7px;"></div>
-                </div>
-                <div style="display:flex; gap:6px; align-items:center;">
-                  <div style="width:10px;height:10px;border-radius:50%;background:#3FB950;flex-shrink:0;"></div>
-                  <div class="mock-row" style="width:55%; height:7px;"></div>
-                </div>
-                <div style="display:flex; gap:6px; align-items:center;">
-                  <div style="width:10px;height:10px;border-radius:50%;background:#F97316;flex-shrink:0;"></div>
-                  <div class="mock-row" style="width:65%; height:7px;"></div>
-                </div>
-              </div>
+              <img src="../images/nm-network-access-manager-image4.png" alt="">
             </div>
-            <div class="screen-label">Politiques d'accès (check / reply attrs)</div>
+            <div class="screen-label">Statistiques</div>
+          </div>
+          <div class="screen-mock">
+            <div class="screen-mock-bar">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="screen-mock-body">
+              <img src="../images/nm-network-access-manager-image5.png" alt="">
+            </div>
+            <div class="screen-label">Politiques d'accès</div>
           </div>
 
         </div>
