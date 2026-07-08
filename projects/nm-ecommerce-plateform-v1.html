@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NM E-Commerce Platform — Nooreddine Maiza</title>
+  <meta name="description"
+    content="Plateforme e-commerce complète développée en PHP avec une architecture inspirée du MVC — catalogue produits, tableau de bord admin, devis, abonnés et envoi d'emails.">
+
+  <!-- Tailwind v4 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <style type="text/tailwindcss">
+    body { font-family: 'Inter', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+
+<body class="bg-white dark:bg-[#0D1117] text-slate-900 dark:text-slate-50 antialiased">
+
+  <!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
+  <header
+    class="sticky top-0 z-50 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-[#0D1117]/80 backdrop-blur">
+    <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+      <span class="font-mono font-bold text-sm text-slate-900 dark:text-slate-100">
+        <a href="../index.html" class="nav-logo"><img src="../images/NM_logo.png" style="max-width: 55px;" alt="NM_logo"></a>
+      </span>
+      <nav class="hidden sm:flex items-center gap-6">
+        <a href="#features"
+          class="font-mono text-[0.75rem] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Fonctionnalités</a>
+        <a href="#configuration"
+          class="font-mono text-[0.75rem] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Configuration</a>
+        <a href="#structure"
+          class="font-mono text-[0.75rem] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">File
+          Tree</a>
+        <a href="https://github.com/nooreddinemaiza/nm-ecommerce-plateform-v1" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-1.5 font-mono text-[0.75rem] px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-slate-900 dark:hover:border-slate-400 transition-colors">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+          </svg>
+          GitHub
+        </a>
+      </nav>
+      <button id="menu-toggle"
+        class="sm:hidden p-2 rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+        <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M3 5h14a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Zm0 4h14a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Zm0 4h14a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Z" />
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu"
+      class="hidden sm:hidden px-6 pb-4 flex flex-col gap-3 border-t border-slate-100 dark:border-slate-800 pt-4">
+      <a href="#features" class="font-mono text-[0.8rem] text-slate-500 dark:text-slate-400">Fonctionnalités</a>
+      <a href="#configuration" class="font-mono text-[0.8rem] text-slate-500 dark:text-slate-400">Configuration</a>
+      <a href="#structure" class="font-mono text-[0.8rem] text-slate-500 dark:text-slate-400">File Tree</a>
+      <a href="https://github.com/nooreddinemaiza/nm-ecommerce-plateform-v1" target="_blank"
+        class="font-mono text-[0.8rem] text-blue-500">GitHub ↗</a>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+  <section
+    class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 py-24 overflow-hidden bg-white dark:bg-[#0D1117]">
+
+    <div
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(88,166,255,0.08),transparent)] dark:bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(88,166,255,0.12),transparent)]">
+    </div>
+
+    <div
+      class="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-blue-200 bg-blue-50 dark:border-blue-800/40 dark:bg-blue-950/30">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span
+        class="font-mono text-[0.68rem] uppercase tracking-widest text-blue-600 dark:text-blue-400 font-medium">v1.0.0 —
+        Depuis 2019</span>
+    </div>
+
+    <h1
+      class="font-mono font-bold leading-[1.1] tracking-tight text-5xl sm:text-6xl lg:text-7xl text-slate-900 dark:text-slate-50 mb-6">
+      <span class="logo" style=" max-width: 150px;display: block;margin: 5px auto;">
+        <a href="https://nooreddinemaiza.github.io" target="_blank" rel="noopener noreferrer">
+          <img src="../images/logo.png" alt="">
+        </a></span> E-Commerce<br>
+      <span class="text-emerald-500 dark:text-emerald-400">Platform</span>
+    </h1>
+
+    <p class="max-w-xl text-base sm:text-lg font-light text-slate-500 dark:text-slate-400 mb-10">
+      Une plateforme e-commerce complète développée en PHP avec une architecture inspirée du MVC —
+      catalogue produits, tableau de bord admin, devis, abonnés et envoi d'emails, le tout réuni sous un même toit.
+    </p>
+
+    <div class="flex flex-wrap gap-3 justify-center mb-12">
+      <a href="#features"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-mono text-[0.82rem] font-medium bg-blue-500 text-white hover:bg-blue-400 transition-colors">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+          <path
+            d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Zm1.5 4.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0ZM8 7a1 1 0 0 0-1 1v4.5a1 1 0 0 0 2 0V8a1 1 0 0 0-1-1Z" />
+        </svg>
+        Explorer les fonctionnalités
+      </a>
+      <a href="#configuration"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-mono text-[0.82rem] font-medium border border-slate-200 text-slate-500 hover:border-slate-400 hover:text-slate-700 transition-colors dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-slate-200">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M0 2.75A2.75 2.75 0 0 1 2.75 0h10.5A2.75 2.75 0 0 1 16 2.75v10.5A2.75 2.75 0 0 1 13.25 16H2.75A2.75 2.75 0 0 1 0 13.25V2.75Zm2.75-1.25c-.69 0-1.25.56-1.25 1.25v10.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25V2.75c0-.69-.56-1.25-1.25-1.25H2.75Z" />
+        </svg>
+        Configurer le .env
+      </a>
+      <a href="https://github.com/nooreddinemaiza/nm-ecommerce-plateform-v1" target="_blank" rel="noopener"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-mono text-[0.82rem] font-medium border border-slate-200 text-slate-500 hover:border-slate-900 hover:text-slate-900 transition-colors dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-300 dark:hover:text-white">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+          <path
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+        </svg>
+        GitHub
+      </a>
+    </div>
+
+    <div
+      class="inline-flex items-center gap-2 px-3 py-1 rounded font-mono text-[0.7rem] bg-slate-100 border border-slate-200 text-slate-500 dark:bg-slate-800/50 dark:border-slate-700 dark:text-slate-400">
+      <svg class="w-3 h-3 text-emerald-400" viewBox="0 0 16 16" fill="currentColor">
+        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Z" />
+      </svg>
+      PHP 8.2+ · MVC-inspired · OOP · v1.0.0
+    </div>
+  </section>
+
+  <hr class="border-slate-100 dark:border-slate-800">
+
+  <!-- ══════════════════════════════════════════
+     FEATURES / CORE MODULES
+══════════════════════════════════════════ -->
+  <section class="max-w-5xl mx-auto px-6 py-20" id="features">
+
+    <p class="font-mono text-[0.7rem] uppercase tracking-widest text-blue-500 dark:text-blue-400 mb-2">// modules
+    </p>
+    <h2 class="font-mono font-bold text-2xl sm:text-3xl text-slate-900 dark:text-slate-50 mb-3">Modules principaux</h2>
+    <p class="text-sm text-slate-500 dark:text-slate-400 max-w-lg mb-10">
+      Chaque partie de la boutique est isolée dans un module dédié. Voici ce qui se cache sous le capot.
+    </p>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden">
+
+      <!-- Catalog -->
+      <div
+        class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-blue-50 dark:bg-blue-950/50">🛒
+        </div>
+        <div>
+          <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Catalogue produits</p>
+          <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Fiches produits, recherche et
+            classement par catégories. Sert les pages publiques du site.</p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-auto">
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">ProductController.php</span>
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">Product.php</span>
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">Category.php</span>
+        </div>
+      </div>
+
+      <!-- Admin dashboard -->
+      <div
+        class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-emerald-50 dark:bg-emerald-950/50">
+          🧭</div>
+        <div>
+          <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Tableau de bord admin
+          </p>
+          <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Gestion centralisée des produits,
+            catégories, pages, modérateurs, abonnés et devis.</p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-auto">
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">DashboardController.php</span>
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">Moderator.php</span>
+        </div>
+      </div>
+
+      <!-- Quotes -->
+      <div
+        class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-violet-50 dark:bg-violet-950/50">🧾
+        </div>
+        <div>
+          <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Système de devis</p>
+          <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Demande de devis en ligne, suivi
+            et gestion depuis l'administration. Copie envoyée au client sur option.</p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-auto">
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-violet-50 border-violet-200 text-violet-700 dark:bg-violet-950/40 dark:border-violet-800/50 dark:text-violet-400">QuoteController.php</span>
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-violet-50 border-violet-200 text-violet-700 dark:bg-violet-950/40 dark:border-violet-800/50 dark:text-violet-400">Quote.php</span>
+        </div>
+      </div>
+
+      <!-- Subscribers -->
+      <div
+        class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-amber-50 dark:bg-amber-950/50">📬
+        </div>
+        <div>
+          <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Abonnés</p>
+          <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Collecte et gestion des
+            abonnés à la newsletter depuis le tableau de bord.</p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-auto">
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-amber-50 border-amber-200 text-amber-700 dark:bg-amber-950/40 dark:border-amber-800/50 dark:text-amber-400">SubscriberController.php</span>
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-amber-50 border-amber-200 text-amber-700 dark:bg-amber-950/40 dark:border-amber-800/50 dark:text-amber-400">Subscriber.php</span>
+        </div>
+      </div>
+
+      <!-- Mail -->
+      <div
+        class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-blue-50 dark:bg-blue-950/50">✉️
+        </div>
+        <div>
+          <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Envoi d'emails (SMTP)
+          </p>
+          <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">PHPMailer branché sur un compte
+            SMTP pour les devis, la réinitialisation de mot de passe et les notifications.</p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-auto">
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">Mailer.php</span>
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">PHPMailer (vendor)</span>
+        </div>
+      </div>
+
+      <!-- Security -->
+      <div
+        class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-emerald-50 dark:bg-emerald-950/50">
+          🔐</div>
+        <div>
+          <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">CAPTCHA & sécurité</p>
+          <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Génération de CAPTCHA, limite de
+            tentatives configurable, et réinitialisation sécurisée du mot de passe.</p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-auto">
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">Captcha.php</span>
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">PasswordReset.php</span>
+        </div>
+      </div>
+
+      <!-- SEO -->
+      <div
+        class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-red-50 dark:bg-red-950/50">🔍</div>
+        <div>
+          <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Métadonnées SEO</p>
+          <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Titre, description et mots-clés
+            gérés par page depuis l'administration, sans toucher au code.</p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-auto">
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-red-50 border-red-200 text-red-600 dark:bg-red-950/40 dark:border-red-800/50 dark:text-red-400">Seo.php</span>
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-red-50 border-red-200 text-red-600 dark:bg-red-950/40 dark:border-red-800/50 dark:text-red-400">PageController.php</span>
+        </div>
+      </div>
+
+      <!-- Pages -->
+      <div
+        class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-violet-50 dark:bg-violet-950/50">📄
+        </div>
+        <div>
+          <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Pages dynamiques</p>
+          <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Création et édition de pages de
+            contenu (à propos, mentions légales…) sans redéploiement.</p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-auto">
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-violet-50 border-violet-200 text-violet-700 dark:bg-violet-950/40 dark:border-violet-800/50 dark:text-violet-400">Page.php</span>
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-violet-50 border-violet-200 text-violet-700 dark:bg-violet-950/40 dark:border-violet-800/50 dark:text-violet-400">ContactController.php</span>
+        </div>
+      </div>
+
+      <!-- Uploads -->
+      <div
+        class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-amber-50 dark:bg-amber-950/50">🖼
+        </div>
+        <div>
+          <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Upload d'images</p>
+          <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Envoi et stockage des visuels
+            produits et pages dans Public/uploads, avec droits d'écriture dédiés.</p>
+        </div>
+        <div class="flex flex-wrap gap-1.5 mt-auto">
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-amber-50 border-amber-200 text-amber-700 dark:bg-amber-950/40 dark:border-amber-800/50 dark:text-amber-400">Uploader.php</span>
+          <span
+            class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-amber-50 border-amber-200 text-amber-700 dark:bg-amber-950/40 dark:border-amber-800/50 dark:text-amber-400">Public/uploads/</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="border-slate-100 dark:border-slate-800">
+
+  <!-- ══════════════════════════════════════════
+     CONFIGURATION (.env)
+══════════════════════════════════════════ -->
+  <section class="max-w-5xl mx-auto px-6 py-20" id="configuration">
+
+    <p class="font-mono text-[0.7rem] uppercase tracking-widest text-blue-500 dark:text-blue-400 mb-2">// configuration
+    </p>
+    <h2 class="font-mono font-bold text-2xl sm:text-3xl text-slate-900 dark:text-slate-50 mb-3">Configurer le .env</h2>
+    <p class="text-sm text-slate-500 dark:text-slate-400 max-w-2xl mb-6">
+      Avant toute utilisation, le fichier d'environnement doit être configuré. Copiez le fichier
+      <code class="font-mono text-[0.8rem] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-blue-600 dark:text-blue-400">.env.copy</code>,
+      renommez-le en <code class="font-mono text-[0.8rem] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-blue-600 dark:text-blue-400">.env</code>,
+      puis renseignez chaque variable avec la valeur demandée.
+    </p>
+
+    <!-- Steps -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+      <div class="flex gap-3 items-start p-4 rounded-lg border border-slate-100 dark:border-slate-800">
+        <span
+          class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center font-mono text-[0.7rem] font-bold bg-blue-100 text-blue-600 dark:bg-blue-950/60 dark:text-blue-400">1</span>
+        <div>
+          <p class="font-mono text-[0.8rem] text-slate-900 dark:text-slate-100 mb-1">Copier le fichier</p>
+          <p class="font-mono text-[0.72rem] text-slate-500 dark:text-slate-400">cp .env.copy .env</p>
+        </div>
+      </div>
+      <div class="flex gap-3 items-start p-4 rounded-lg border border-slate-100 dark:border-slate-800">
+        <span
+          class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center font-mono text-[0.7rem] font-bold bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400">2</span>
+        <div>
+          <p class="font-mono text-[0.8rem] text-slate-900 dark:text-slate-100 mb-1">Éditer les variables</p>
+          <p class="font-mono text-[0.72rem] text-slate-500 dark:text-slate-400">nano .env</p>
+        </div>
+      </div>
+      <div class="flex gap-3 items-start p-4 rounded-lg border border-slate-100 dark:border-slate-800">
+        <span
+          class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center font-mono text-[0.7rem] font-bold bg-violet-100 text-violet-600 dark:bg-violet-950/60 dark:text-violet-400">3</span>
+        <div>
+          <p class="font-mono text-[0.8rem] text-slate-900 dark:text-slate-100 mb-1">Enregistrer</p>
+          <p class="font-mono text-[0.72rem] text-slate-500 dark:text-slate-400">Le fichier reste à la racine du projet</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- .env terminal card -->
+    <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800">
+      <div
+        class="flex items-center gap-2 px-4 py-3 bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+        <span class="w-3 h-3 rounded-full bg-red-400"></span>
+        <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+        <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+        <span class="ml-2 font-mono text-[0.7rem] text-slate-400 dark:text-slate-500">.env</span>
+      </div>
+      <div class="bg-white dark:bg-[#161B22] px-6 py-5 font-mono text-[0.74rem] leading-6 overflow-x-auto">
+
+        <p class="text-slate-400 dark:text-slate-600"># === BASE DE DONNÉES ===</p>
+        <p class="text-slate-400 dark:text-slate-600"># Adresse du serveur MySQL</p>
+        <p><span class="text-violet-500 dark:text-violet-400">DB_HOST</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span></p>
+        <p class="text-slate-400 dark:text-slate-600"># Nom de la base de données</p>
+        <p><span class="text-violet-500 dark:text-violet-400">DB_NAME</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span></p>
+        <p class="text-slate-400 dark:text-slate-600"># Nom d'utilisateur pour la base de données</p>
+        <p><span class="text-violet-500 dark:text-violet-400">DB_USER</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span></p>
+        <p class="text-slate-400 dark:text-slate-600"># Mot de passe de la base de données</p>
+        <p class="text-slate-400 dark:text-slate-600"># Cette ligne sera effacée automatiquement pour votre sécurité</p>
+        <p class="mb-3"><span class="text-violet-500 dark:text-violet-400">DB_PASS</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span></p>
+
+        <p class="text-slate-400 dark:text-slate-600"># === MODE MAINTENANCE ===</p>
+        <p class="mb-3"><span class="text-violet-500 dark:text-violet-400">MAINTENANCE</span><span class="text-slate-400">=</span><span class="text-blue-500 dark:text-blue-400">false</span> <span class="text-slate-300 dark:text-slate-700">→ true pour activer la maintenance du site (affiche un message aux visiteurs)</span></p>
+
+        <p class="text-slate-400 dark:text-slate-600"># === INFOS PUBLIQUES DU SITE ===</p>
+        <p><span class="text-violet-500 dark:text-violet-400">WEB_NAME</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span> <span class="text-slate-300 dark:text-slate-700">→ Nom affiché dans l'en-tête ou le footer</span></p>
+        <p><span class="text-violet-500 dark:text-violet-400">WEB_SLOGAN</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span> <span class="text-slate-300 dark:text-slate-700">→ Slogan ou phrase d'accroche</span></p>
+        <p><span class="text-violet-500 dark:text-violet-400">WEB_ADDRESS</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span> <span class="text-slate-300 dark:text-slate-700">→ Adresse physique (page contact)</span></p>
+        <p><span class="text-violet-500 dark:text-violet-400">WEB_PHONE</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span> <span class="text-slate-300 dark:text-slate-700">→ Numéro de contact</span></p>
+        <p class="mb-3"><span class="text-violet-500 dark:text-violet-400">WEB_EMAIL</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span> <span class="text-slate-300 dark:text-slate-700">→ Email de contact du site</span></p>
+
+        <p class="text-slate-400 dark:text-slate-600"># === PARAMÈTRES EMAIL (ENVOI DE MAIL) ===</p>
+        <p class="text-slate-400 dark:text-slate-600"># Mot de passe ou token d'application (Gmail : activer les mots de passe d'application)</p>
+        <p class="text-slate-400 dark:text-slate-600"># Cette ligne sera effacée automatiquement pour votre sécurité</p>
+        <p><span class="text-violet-500 dark:text-violet-400">WEB_EMAIL_PASSWORD</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span></p>
+        <p><span class="text-violet-500 dark:text-violet-400">WEB_EMAIL_HOST</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span> <span class="text-slate-300 dark:text-slate-700">→ Hôte SMTP (ex : Gmail)</span></p>
+        <p><span class="text-violet-500 dark:text-violet-400">WEB_EMAIL_PORT</span><span class="text-slate-400">=</span> <span class="text-slate-300 dark:text-slate-700">→ Port SMTP (587 pour TLS, 465 pour SSL)</span></p>
+        <p class="mb-3"><span class="text-violet-500 dark:text-violet-400">WEB_EMAIL_ENCRYPTION</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span> <span class="text-slate-300 dark:text-slate-700">→ Méthode de chiffrement : tls ou ssl</span></p>
+
+        <p class="text-slate-400 dark:text-slate-600"># === IDENTIFIANTS DE L'ADMIN PRINCIPAL ===</p>
+        <p><span class="text-violet-500 dark:text-violet-400">WEB_ADMIN_USERNAME</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span> <span class="text-slate-300 dark:text-slate-700">→ Nom d'utilisateur admin (tableau de bord)</span></p>
+        <p class="mb-3"><span class="text-violet-500 dark:text-violet-400">WEB_ADMIN_EMAIL</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">""</span> <span class="text-slate-300 dark:text-slate-700">→ Email principal de l'admin</span></p>
+
+        <p class="text-slate-400 dark:text-slate-600"># === CAPTCHA ===</p>
+        <p><span class="text-violet-500 dark:text-violet-400">CAPTCHA_LENGTH</span><span class="text-slate-400">=</span><span class="text-blue-500 dark:text-blue-400">6</span> <span class="text-slate-300 dark:text-slate-700">→ Nombre de caractères dans le captcha</span></p>
+        <p class="mb-3"><span class="text-violet-500 dark:text-violet-400">CAPTCHA_MAX_ATTEMPTS</span><span class="text-slate-400">=</span><span class="text-blue-500 dark:text-blue-400">3</span> <span class="text-slate-300 dark:text-slate-700">→ Nombre d'essais autorisés avant blocage</span></p>
+
+        <p class="text-slate-400 dark:text-slate-600"># === COMMANDES ===</p>
+        <p><span class="text-violet-500 dark:text-violet-400">ORDER_ID_NUMBER</span><span class="text-slate-400">=</span><span class="text-blue-500 dark:text-blue-400">13102025</span> <span class="text-slate-300 dark:text-slate-700">→ Numéro de départ pour les ID de commande</span></p>
+        <p class="mb-3"><span class="text-violet-500 dark:text-violet-400">WEB_CANCEL_ORDER_LIMIT</span><span class="text-slate-400">=</span><span class="text-emerald-600 dark:text-emerald-400">"1 Jour"</span> <span class="text-slate-300 dark:text-slate-700">→ Délai autorisé pour annuler une commande</span></p>
+
+        <p class="text-slate-400 dark:text-slate-600"># === DEVIS ===</p>
+        <p><span class="text-violet-500 dark:text-violet-400">DEVIS_WITH_SUBSCRIBE</span><span class="text-slate-400">=</span><span class="text-blue-500 dark:text-blue-400">false</span> <span class="text-slate-300 dark:text-slate-700">→ Si true : l'utilisateur doit être inscrit pour demander un devis</span></p>
+        <p><span class="text-violet-500 dark:text-violet-400">DEVIS_SEND_COPY_TO_CLIENT</span><span class="text-slate-400">=</span><span class="text-blue-500 dark:text-blue-400">true</span> <span class="text-slate-300 dark:text-slate-700">→ Si true : le client reçoit une copie de son devis par email</span></p>
+
+      </div>
+    </div>
+
+    <p class="text-[0.78rem] text-slate-400 dark:text-slate-500 mt-4">
+      ⚠️ Les variables <span class="font-mono text-slate-500 dark:text-slate-400">DB_PASS</span> et
+      <span class="font-mono text-slate-500 dark:text-slate-400">WEB_EMAIL_PASSWORD</span> sont effacées
+      automatiquement après lecture pour votre sécurité — ne les partagez jamais publiquement.
+    </p>
+  </section>
+
+  <hr class="border-slate-100 dark:border-slate-800">
+
+  <!-- ══════════════════════════════════════════
+     FILE TREE
+══════════════════════════════════════════ -->
+  <section class="max-w-5xl mx-auto px-6 py-20" id="structure">
+
+    <p class="font-mono text-[0.7rem] uppercase tracking-widest text-blue-500 dark:text-blue-400 mb-2">// file structure
+    </p>
+    <h2 class="font-mono font-bold text-2xl sm:text-3xl text-slate-900 dark:text-slate-50 mb-3">Project Layout</h2>
+    <p class="text-sm text-slate-500 dark:text-slate-400 max-w-lg mb-10">
+      Une convention de dossiers prévisible pour toujours savoir où chercher.
+    </p>
+
+    <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800">
+      <div
+        class="flex items-center gap-2 px-4 py-3 bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+        <span class="w-3 h-3 rounded-full bg-red-400"></span>
+        <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+        <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+        <span class="ml-2 font-mono text-[0.7rem] text-slate-400 dark:text-slate-500">NM E-Commerce Platform /</span>
+      </div>
+      <div class="bg-white dark:bg-[#161B22] px-6 py-5 font-mono text-[0.75rem] leading-7 overflow-x-auto">
+
+        <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-blue-600 dark:text-blue-400 font-bold">App/</span><span class="text-slate-300 dark:text-slate-700 ml-2">→ Controllers &amp; Models</span></div>
+        <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-blue-600 dark:text-blue-400 font-bold">Config/</span><span class="text-slate-300 dark:text-slate-700 ml-2">→ Fichiers de configuration par domaine</span></div>
+        <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-blue-600 dark:text-blue-400 font-bold">Core/</span><span class="text-slate-300 dark:text-slate-700 ml-2">→ Cœur du framework (routing, BDD, sécurité)</span></div>
+        <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-blue-600 dark:text-blue-400 font-bold">Database/</span><span class="text-slate-300 dark:text-slate-700 ml-2">→ Schéma SQL et jeux de données</span></div>
+        <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-blue-600 dark:text-blue-400 font-bold">Public/</span><span class="text-slate-300 dark:text-slate-700 ml-2">→ Point d'entrée + assets + uploads</span></div>
+        <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-blue-600 dark:text-blue-400 font-bold">Resources/</span><span class="text-slate-300 dark:text-slate-700 ml-2">→ Vues, layouts, composants</span></div>
+        <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-blue-600 dark:text-blue-400 font-bold">Routes/</span><span class="text-slate-300 dark:text-slate-700 ml-2">→ Définitions de routes par contexte</span></div>
+        <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-blue-600 dark:text-blue-400 font-bold">Storage/</span><span class="text-slate-300 dark:text-slate-700 ml-2">→ Logs, sauvegardes, fichiers</span></div>
+        <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-blue-600 dark:text-blue-400 font-bold">Vendor/</span><span class="text-slate-300 dark:text-slate-700 ml-2">→ Dépendances Composer</span></div>
+        <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-emerald-600 dark:text-emerald-400">composer.json</span></div>
+        <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-violet-500 dark:text-violet-400">.env.copy</span><span class="text-slate-300 dark:text-slate-700 ml-2">→ Modèle à copier en .env</span></div>
+        <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-violet-500 dark:text-violet-400">.env</span><span class="text-slate-300 dark:text-slate-700 ml-2">→ Variables d'environnement (à créer)</span></div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="border-slate-100 dark:border-slate-800">
+
+  <!-- ══════════════════════════════════════════
+     CTA BANNER
+══════════════════════════════════════════ -->
+  <section class="max-w-5xl mx-auto px-6 py-16 flex flex-col sm:flex-row items-center justify-between gap-6">
+    <div>
+      <p class="font-mono font-bold text-lg text-slate-900 dark:text-slate-100">Prêt à démarrer ?</p>
+      <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Clonez le dépôt ou parcourez le code source sur GitHub.</p>
+    </div>
+    <div class="flex flex-wrap gap-3">
+      <a href="https://github.com/nooreddinemaiza/nm-ecommerce-plateform-v1" target="_blank" rel="noopener"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-mono text-[0.82rem] font-medium bg-slate-900 text-white hover:bg-slate-700 transition-colors dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white">
+        <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+          <path
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+        </svg>
+        View on GitHub
+      </a>
+      <a href="#configuration"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-mono text-[0.82rem] font-medium border border-emerald-300 text-emerald-700 hover:bg-emerald-50 transition-colors dark:border-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
+        <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+          <path
+            d="M0 2.75A2.75 2.75 0 0 1 2.75 0h10.5A2.75 2.75 0 0 1 16 2.75v10.5A2.75 2.75 0 0 1 13.25 16H2.75A2.75 2.75 0 0 1 0 13.25V2.75Zm2.75-1.25c-.69 0-1.25.56-1.25 1.25v10.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25V2.75c0-.69-.56-1.25-1.25-1.25H2.75Zm4.75 7a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Zm0-3a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75Zm-3.5 3a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0-3a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" />
+        </svg>
+        Voir la configuration .env
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+  <footer class="border-t border-slate-100 dark:border-slate-800 py-8 px-6">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span class="font-mono text-[0.72rem] text-slate-400 dark:text-slate-500">
+        <span class="text-blue-500 dark:text-blue-400">NM</span> E-Commerce Platform · v1.0.0 · PHP 8.2+ MVC-inspired
+      </span>
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/nooreddinemaiza/nm-ecommerce-plateform-v1" target="_blank" rel="noopener"
+          class="font-mono text-[0.72rem] text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+          GitHub ↗
+        </a>
+        <span class="text-slate-200 dark:text-slate-700">|</span>
+        <span class="font-mono text-[0.72rem] text-slate-400 dark:text-slate-500">
+          Built with ❤️ by <a href="https://github.com/nooreddinemaiza" target="_blank"
+            class="text-blue-500 dark:text-blue-400 hover:underline">nooreddinemaiza</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+    document.querySelectorAll('#mobile-menu a').forEach(a => {
+      a.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden'));
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const href = a.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const t = document.querySelector(href);
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+
+</body>
+
+</html>
