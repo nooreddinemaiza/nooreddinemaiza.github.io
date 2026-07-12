@@ -1,0 +1,191 @@
+body { font-family: 'Inter', sans-serif; }
+:root {
+  --bg:          #0D1117;
+  --surface:     #161B22;
+  --surface-2:   #1C2333;
+  --border:      #30363D;
+  --cyan:        #00B4D8;
+  --cyan-dim:    rgba(0, 180, 216, 0.12);
+  --violet:      #7C3AED;
+  --violet-dim:  rgba(124, 58, 237, 0.12);
+  --green:       #3FB950;
+  --text:        #E6EDF3;
+  --text-muted:  #8B949E;
+  --text-faint:  #484F58;
+  --radius-sm:   6px;
+  --radius:      12px;
+  --radius-lg:   20px;
+  --font-display:'Space Grotesk', sans-serif;
+  --font-body:   'Inter', sans-serif;
+  --font-mono:   'JetBrains Mono', monospace;
+  --transition:  0.25s ease;
+}
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  height: 64px;
+  background: rgba(13, 17, 23, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+.nav-logo span { color: var(--cyan); }
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+.nav-links a:hover,
+.nav-links a.active { color: var(--text); }
+
+.nav-cta {
+  padding: 8px 20px;
+  background: var(--cyan-dim);
+  border: 1px solid var(--cyan);
+  border-radius: var(--radius-sm);
+  color: var(--cyan) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  transition: background var(--transition) !important;
+}
+.nav-cta:hover { background: rgba(0,180,216,0.22) !important; }
+
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-burger span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+@media (max-width: 700px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 5%;
+    gap: 1.2rem;
+  }
+  .projects-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+}
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+
+.preview-image{
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+}
+.preview-image:hover{
+    transform: scale(1.02);
+}
+
+/* ── Lightbox ── */
+#lightbox-overlay{
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    cursor: zoom-out;
+}
+#lightbox-overlay.active{
+    display: flex;
+}
+#lightbox-img{
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    cursor: default;
+    user-select: none;
+}
+#lightbox-close{
+    position: fixed;
+    top: 1.25rem;
+    right: 1.5rem;
+    color: #fff;
+    font-size: 1.75rem;
+    line-height: 1;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 9999px;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+#lightbox-close:hover{
+    background: rgba(255,255,255,0.2);
+}
+.lightbox-nav{
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 2rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 9999px;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+}
+.lightbox-nav:hover{
+    background: rgba(255,255,255,0.2);
+}
+#lightbox-prev{ left: 1.5rem; }
+#lightbox-next{ right: 1.5rem; }
+#lightbox-counter{
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.7);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+}

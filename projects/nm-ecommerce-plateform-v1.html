@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NM E-Commerce Platform — Nooreddine Maiza</title>
-  <meta name="description"
-    content="Plateforme e-commerce complète développée en PHP avec une architecture inspirée du MVC — catalogue produits, tableau de bord admin, devis, abonnés et envoi d'emails.">
+  <meta name="description" content="Plateforme e-commerce complète développée en PHP avec une architecture inspirée du MVC — catalogue produits, tableau de bord admin, devis, abonnés et envoi d'emails.">
 
   <!-- Tailwind v4 CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -14,14 +13,9 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-
-  <style type="text/tailwindcss">
-    body { font-family: 'Inter', sans-serif; }
-    .font-mono { font-family: 'JetBrains Mono', monospace; }
-  </style>
+  <link href="../css/preview.css" rel="stylesheet">
 </head>
 
 <body class="bg-white dark:bg-[#0D1117] text-slate-900 dark:text-slate-50 antialiased">
@@ -31,44 +25,29 @@
 ══════════════════════════════════════════ -->
   <header
     class="sticky top-0 z-50 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-[#0D1117]/80 backdrop-blur">
-    <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-      <span class="font-mono font-bold text-sm text-slate-900 dark:text-slate-100">
-        <a href="../index.html" class="nav-logo"><img src="../images/NM_logo.png" style="max-width: 55px;"
-            alt="NM_logo"></a>
-      </span>
-      <nav class="hidden sm:flex items-center gap-6">
-        <a href="/" class="font-mono text-[0.75rem] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Accueil</a>
-        <a href="#features" class="font-mono text-[0.75rem] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Fonctionnalités</a>
-        <a href="#configuration"
-          class="font-mono text-[0.75rem] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Configuration</a>
-        <a href="#structure"
-          class="font-mono text-[0.75rem] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">File
-          Tree</a>
-        <a href="https://github.com/nooreddinemaiza/nm-ecommerce-plateform-v1" target="_blank" rel="noopener"
-          class="inline-flex items-center gap-1.5 font-mono text-[0.75rem] px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-slate-900 dark:hover:border-slate-400 transition-colors">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
-            <path
-              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
-          </svg>
-          GitHub
-        </a>
-      </nav>
-      <button id="menu-toggle"
-        class="sm:hidden p-2 rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
-        <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd"
-            d="M3 5h14a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Zm0 4h14a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Zm0 4h14a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Z" />
-        </svg>
-      </button>
-    </div>
-    <div id="mobile-menu"
-      class="hidden sm:hidden px-6 pb-4 flex flex-col gap-3 border-t border-slate-100 dark:border-slate-800 pt-4">
-      <a href="#features" class="font-mono text-[0.8rem] text-slate-500 dark:text-slate-400">Fonctionnalités</a>
-      <a href="#configuration" class="font-mono text-[0.8rem] text-slate-500 dark:text-slate-400">Configuration</a>
-      <a href="#structure" class="font-mono text-[0.8rem] text-slate-500 dark:text-slate-400">File Tree</a>
-      <a href="https://github.com/nooreddinemaiza/nm-ecommerce-plateform-v1" target="_blank"
-        class="font-mono text-[0.8rem] text-blue-500">GitHub ↗</a>
-    </div>
+    <nav class="nav">
+      <a href="../index.html" class="nav-logo"><img src="../images/NM_logo.png" style="max-width: 55px;"
+          alt="NM_logo"></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="#features">Fonctionnalités</a></li>
+        <li><a href="#configuration">Configuration</a></li>
+        <li><a href="#structure">File Tree</a></li>
+        <li>
+          <a href="https://github.com/nooreddinemaiza/nm-ecommerce-plateform-v1" target="_blank" rel="noopener"
+            class="inline-flex items-center gap-1.5 font-mono text-[0.75rem] px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-slate-900 dark:hover:border-slate-400 transition-colors">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+              <path
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+            </svg>
+            GitHub
+          </a>
+        </li>
+      </ul>
+      <div class="nav-burger" aria-label="Menu" role="button" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+    </nav>
   </header>
 
   <!-- ══════════════════════════════════════════
@@ -138,6 +117,81 @@
       PHP 8.2+ · MVC-inspired · OOP · v1.0.0
     </div>
   </section>
+
+  <hr class="border-slate-100 dark:border-slate-800">
+
+  <!-- ══════════════════════════════════════════
+     Screenshots
+══════════════════════════════════════════ -->
+
+  <section class="max-w-5xl mx-auto px-6 py-20">
+
+    <p class="font-mono text-[0.7rem] uppercase tracking-widest text-blue-500 dark:text-blue-400 mb-2">// Previews
+    </p>
+    <h2 class="font-mono font-bold text-2xl sm:text-3xl text-slate-900 dark:text-slate-50 mb-3">Captures d'écrans</h2>
+    <p class="text-sm text-slate-500 dark:text-slate-400 max-w-lg mb-6">
+      Cliquez sur une image pour l'agrandir.
+    </p>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden"
+      id="gallery">
+      <div class="bg-white dark:bg-[#161B22] p-2 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <img class="preview-image gallery-img" src="../images/ecomv1/m1.png" alt="" srcset="">
+      </div>
+      <div
+        class="bg-white dark:bg-[#161B22] p-2 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <img class="preview-image gallery-img" src="../images/ecomv1/m2.png" alt="" srcset="">
+      </div>
+      <div
+        class="bg-white dark:bg-[#161B22] p-2 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <img class="preview-image gallery-img" src="../images/ecomv1/m3.png" alt="" srcset="">
+      </div>
+      <div
+        class="bg-white dark:bg-[#161B22] p-2 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <img class="preview-image gallery-img" src="../images/ecomv1/m4.png" alt="" srcset="">
+      </div>
+      <div
+        class="bg-white dark:bg-[#161B22] p-2 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <img class="preview-image gallery-img" src="../images/ecomv1/m5.png" alt="" srcset="">
+      </div>
+      <div
+        class="bg-white dark:bg-[#161B22] p-2 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <img class="preview-image gallery-img" src="../images/ecomv1/m6.png" alt="" srcset="">
+      </div>
+      <div
+        class="bg-white dark:bg-[#161B22] p-2 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <img class="preview-image gallery-img" src="../images/ecomv1/m7.png" alt="" srcset="">
+      </div>
+      <div
+        class="bg-white dark:bg-[#161B22] p-2 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <img class="preview-image gallery-img" src="../images/ecomv1/m8.png" alt="" srcset="">
+      </div>
+      <div
+        class="bg-white dark:bg-[#161B22] p-2 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <img class="preview-image gallery-img" src="../images/ecomv1/m9.png" alt="" srcset="">
+      </div>
+      <div
+        class="bg-white dark:bg-[#161B22] p-2 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <img class="preview-image gallery-img" src="../images/ecomv1/m10.png" alt="" srcset="">
+      </div>
+      <div
+        class="bg-white dark:bg-[#161B22] p-2 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+        <img class="preview-image gallery-img" src="../images/ecomv1/m11.png" alt="" srcset="">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+     LIGHTBOX
+══════════════════════════════════════════ -->
+  <div id="lightbox-overlay">
+    <div id="lightbox-close">&times;</div>
+    <div class="lightbox-nav" id="lightbox-prev">&#8249;</div>
+    <img id="lightbox-img" src="" alt="Aperçu agrandi">
+    <div class="lightbox-nav" id="lightbox-next">&#8250;</div>
+    <div id="lightbox-counter"></div>
+  </div>
 
   <hr class="border-slate-100 dark:border-slate-800">
 
@@ -323,7 +377,7 @@
       Avant toute utilisation, le fichier d'environnement doit être configuré. Copiez le fichier
       <code
         class="font-mono text-[0.8rem] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-blue-600 dark:text-blue-400">env.copy</code>
-      que vous trouvez dans le dossier 
+      que vous trouvez dans le dossier
       <span
         class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">config/</span>,
       renommez-le en <code
@@ -355,7 +409,8 @@
         <div>
           <p class="font-mono text-[0.8rem] text-slate-900 dark:text-slate-100 mb-1">Enregistrer</p>
           <p class="font-mono text-[0.72rem] text-slate-500 dark:text-slate-400">Le fichier reste dans le même dossier
-            <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">config/</span>,
+            <span
+              class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">config/</span>,
           </p>
         </div>
       </div>
@@ -463,7 +518,8 @@
       </div>
     </div>
     <p class="text-[0.78rem] text-slate-400 dark:text-slate-500 mt-4">
-      ⚠️ Les permissions appliquées sur ce fichier .env doivent être strictes et pour votre sécurité — ne le partagez jamais publiquement.
+      ⚠️ Les permissions appliquées sur ce fichier .env doivent être strictes et pour votre sécurité — ne le partagez
+      jamais publiquement.
     </p>
   </section>
 
@@ -493,10 +549,12 @@
 
         <div class="flex items-center gap-1 whitespace-nowrap"><span
             class="text-blue-600 dark:text-blue-400 font-bold">config/</span><span
-            class="text-slate-300 dark:text-slate-700 ml-2">→ Fichiers de configuration .env et sa copie env.copy</span></div>
+            class="text-slate-300 dark:text-slate-700 ml-2">→ Fichiers de configuration .env et sa copie env.copy</span>
+        </div>
         <div class="flex items-center gap-1 whitespace-nowrap"><span
             class="text-blue-600 dark:text-blue-400 font-bold">Src/</span><span
-            class="text-slate-300 dark:text-slate-700 ml-2">→ Cœur du projet (routing, BDD, sécurité, Controlleurs, Models...)</span></div>
+            class="text-slate-300 dark:text-slate-700 ml-2">→ Cœur du projet (routing, BDD, sécurité, Controlleurs,
+            Models...)</span></div>
         <div class="flex items-center gap-1 whitespace-nowrap"><span
             class="text-blue-600 dark:text-blue-400 font-bold">public/</span><span
             class="text-slate-300 dark:text-slate-700 ml-2">→ Point d'entrée + assets</span></div>
@@ -563,23 +621,8 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById('menu-toggle').addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-    document.querySelectorAll('#mobile-menu a').forEach(a => {
-      a.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden'));
-    });
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const href = a.getAttribute('href');
-        if (href === '#') return;
-        e.preventDefault();
-        const t = document.querySelector(href);
-        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-  </script>
+  <script src="../js/main.js"></script>
+  <script src="../js/preview.js"></script>
 
 </body>
 
