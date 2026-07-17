@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NM Base Framework v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+  body { font-family: 'Inter', sans-serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+</style>
+</head>
+<body class="bg-white dark:bg-[#0D1117]">
+    <header
+    class="sticky top-0 z-50 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-[#0D1117]/80 backdrop-blur">
+    <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+      <span class="font-mono font-bold text-sm text-slate-900 dark:text-slate-100">
+        <a href="../index.html" class="nav-logo"><img src="../images/NM_logo.png" style="max-width: 55px;"
+            alt="NM_logo"></a>
+      </span>
+      <nav class="hidden sm:flex items-center gap-6">
+        <a href="../index.html"
+          class="font-mono text-[0.75rem] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Accueil</a>
+        <a href="#architecture"
+          class="font-mono text-[0.75rem] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Architecture</a>
+        <a href="#features"
+          class="font-mono text-[0.75rem] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Features</a>
+        <a href="#structure"
+          class="font-mono text-[0.75rem] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">File
+          Tree</a>
+        <a href="https://github.com/nooreddinemaiza/nm-base-framework-v2" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-1.5 font-mono text-[0.75rem] px-3 py-1.5 rounded-md border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-slate-900 dark:hover:border-slate-400 transition-colors">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor">
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+          </svg>
+          GitHub
+        </a>
+      </nav>
+      <!-- Mobile menu toggle -->
+      <button id="menu-toggle"
+        class="sm:hidden p-2 rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+        <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M3 5h14a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Zm0 4h14a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Zm0 4h14a1 1 0 0 1 0 2H3a1 1 0 0 1 0-2Z" />
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile dropdown -->
+    <div id="mobile-menu"
+      class="hidden sm:hidden px-6 pb-4 flex flex-col gap-3 border-t border-slate-100 dark:border-slate-800 pt-4">
+      <a href="#architecture" class="font-mono text-[0.8rem] text-slate-500 dark:text-slate-400">Architecture</a>
+      <a href="#features" class="font-mono text-[0.8rem] text-slate-500 dark:text-slate-400">Features</a>
+      <a href="#structure" class="font-mono text-[0.8rem] text-slate-500 dark:text-slate-400">File Tree</a>
+      <a href="https://github.com/nooreddinemaiza/nm-base-framework-v2" target="_blank"
+        class="font-mono text-[0.8rem] text-blue-500">GitHub ↗</a>
+    </div>
+  </header>
+<!-- HERO -->
+<section class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 py-24 overflow-hidden">
+
+  <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(139,92,246,0.08),transparent)] dark:bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(139,92,246,0.12),transparent)]"></div>
+
+  <div class="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-violet-200 bg-violet-50 dark:border-violet-800/40 dark:bg-violet-950/30">
+    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+    <span class="font-mono text-[0.68rem] uppercase tracking-widest text-violet-600 dark:text-violet-400 font-medium">v2.0.0 — Composer Powered</span>
+  </div>
+
+  <h1 class="font-mono font-bold leading-[1.1] tracking-tight text-5xl sm:text-6xl lg:text-7xl text-slate-900 dark:text-slate-50 mb-6">
+    NM Base<br>Framework
+  </h1>
+
+  <p class="max-w-xl text-base sm:text-lg font-light text-slate-500 dark:text-slate-400 mb-10">
+    The framework, rebuilt on the shoulders of the ecosystem —
+    Symfony HttpFoundation, Illuminate's Eloquent ORM, hardened cryptography and a full JWT toolchain, wired into the same clean MVC core.
+  </p>
+
+  <div class="flex flex-wrap gap-3 justify-center mb-12">
+    <a href="#architecture"
+       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-mono text-[0.82rem] font-medium bg-violet-500 text-white hover:bg-violet-400 transition-colors">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0Zm1.5 4.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0ZM8 7a1 1 0 0 0-1 1v4.5a1 1 0 0 0 2 0V8a1 1 0 0 0-1-1Z"/></svg>
+      Explore Architecture
+    </a>
+    <a href="#dependencies"
+       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-mono text-[0.82rem] font-medium border border-slate-200 text-slate-500 hover:border-slate-400 hover:text-slate-700 transition-colors dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-slate-200">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 0 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Z"/></svg>
+      composer.json
+    </a>
+    <a href="#structure"
+       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-mono text-[0.82rem] font-medium border border-slate-200 text-slate-500 hover:border-slate-400 hover:text-slate-700 transition-colors dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-slate-200">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor"><path d="M2 4.75A.75.75 0 0 1 2.75 4h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75Zm0 3.5A.75.75 0 0 1 2.75 7.5h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 8.25Zm0 3.5a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"/></svg>
+      View File Tree
+    </a>
+    <a href="https://github.com/nooreddinemaiza/nm-base-framework-v2" target="_blank" rel="noopener"
+       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-mono text-[0.82rem] font-medium border border-slate-200 text-slate-500 hover:border-slate-900 hover:text-slate-900 transition-colors dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-300 dark:hover:text-white">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      GitHub
+    </a>
+    <a href="https://nooreddinemaiza.github.io/projects/nm-base-framework.html" target="_blank" rel="noopener"
+       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-mono text-[0.82rem] font-medium border border-emerald-200 text-emerald-600 hover:bg-emerald-50 transition-colors dark:border-emerald-800/50 dark:text-emerald-400 dark:hover:bg-emerald-950/30">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Z"/><path d="M6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
+      Project Page
+    </a>
+  </div>
+
+  <div class="inline-flex items-center gap-2 px-3 py-1 rounded font-mono text-[0.7rem] bg-slate-100 border border-slate-200 text-slate-500 dark:bg-slate-800/50 dark:border-slate-700 dark:text-slate-400">
+    <svg class="w-3 h-3 text-emerald-400" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13Z"/></svg>
+    PHP 8.2 · Composer · Symfony · Illuminate · v2.0.0
+  </div>
+</section>
+
+<hr class="border-slate-100 dark:border-slate-800">
+
+<!-- ARCHITECTURE -->
+<section class="max-w-5xl mx-auto px-6 py-20" id="architecture">
+
+  <p class="font-mono text-[0.7rem] uppercase tracking-widest text-violet-500 dark:text-violet-400 mb-2">// architecture</p>
+  <h2 class="font-mono font-bold text-2xl sm:text-3xl text-slate-900 dark:text-slate-50 mb-3">Core Modules</h2>
+  <p class="text-sm text-slate-500 dark:text-slate-400 max-w-lg mb-10">
+    Same modular core, now backed by battle-tested packages instead of hand-rolled internals wherever it makes sense.
+  </p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden">
+
+    <div class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-blue-50 dark:bg-blue-950/50">🔀</div>
+      <div>
+        <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Routing &amp; HTTP</p>
+        <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Named routes compiled to regex, dispatched through Request/Response objects now built on Symfony HttpFoundation for a battle-tested HTTP layer.</p>
+      </div>
+      <div class="flex flex-wrap gap-1.5 mt-auto">
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">Router.php</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">Route.php</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">symfony/http-foundation</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">Request.php</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">Response.php</span>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-emerald-50 dark:bg-emerald-950/50">🗄</div>
+      <div>
+        <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">ORM &amp; Query Builder</p>
+        <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Eloquent-style models, relationships and pagination powered by Illuminate Database, replacing the hand-written query builder.</p>
+      </div>
+      <div class="flex flex-wrap gap-1.5 mt-auto">
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">illuminate/database</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">illuminate/pagination</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">BaseModel.php</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">Migrator.php</span>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-red-50 dark:bg-red-950/50">🔐</div>
+      <div>
+        <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Cryptography &amp; Secrets</p>
+        <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Modern authenticated encryption via Halite (libsodium) and defuse/php-encryption, with constant-time helpers to avoid timing attacks.</p>
+      </div>
+      <div class="flex flex-wrap gap-1.5 mt-auto">
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-red-50 border-red-200 text-red-600 dark:bg-red-950/40 dark:border-red-800/50 dark:text-red-400">paragonie/halite</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-red-50 border-red-200 text-red-600 dark:bg-red-950/40 dark:border-red-800/50 dark:text-red-400">defuse/php-encryption</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-red-50 border-red-200 text-red-600 dark:bg-red-950/40 dark:border-red-800/50 dark:text-red-400">constant_time_encoding</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-red-50 border-red-200 text-red-600 dark:bg-red-950/40 dark:border-red-800/50 dark:text-red-400">hidden-string</span>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-violet-50 dark:bg-violet-950/50">🪪</div>
+      <div>
+        <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">JWT &amp; Auth Tokens</p>
+        <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">First-class JWT issuing and verification for stateless auth and APIs, combining two complementary libraries for signing and JWK/JWS/JWE support.</p>
+      </div>
+      <div class="flex flex-wrap gap-1.5 mt-auto">
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-violet-50 border-violet-200 text-violet-700 dark:bg-violet-950/40 dark:border-violet-800/50 dark:text-violet-400">web-token/jwt-library</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-violet-50 border-violet-200 text-violet-700 dark:bg-violet-950/40 dark:border-violet-800/50 dark:text-violet-400">firebase/php-jwt</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-violet-50 border-violet-200 text-violet-700 dark:bg-violet-950/40 dark:border-violet-800/50 dark:text-violet-400">TokenGuard.php</span>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-emerald-50 dark:bg-emerald-950/50">🛡</div>
+      <div>
+        <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Security &amp; CSRF</p>
+        <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">CSRF token generation and validation delegated to Symfony Security CSRF, layered under the existing Authorization and Validator utilities.</p>
+      </div>
+      <div class="flex flex-wrap gap-1.5 mt-auto">
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">symfony/security-csrf</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">CSRF.php</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">Authorization.php</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">Validator.php</span>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-blue-50 dark:bg-blue-950/50">✅</div>
+      <div>
+        <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Validation</p>
+        <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Declarative rule chains via Respect/Validation, plus RFC-compliant email checks that don't reject valid real-world addresses.</p>
+      </div>
+      <div class="flex flex-wrap gap-1.5 mt-auto">
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">respect/validation</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">egulias/email-validator</span>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-amber-50 dark:bg-amber-950/50">📡</div>
+      <div>
+        <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">HTTP Client &amp; Logging</p>
+        <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Outbound HTTP calls through Guzzle with retry/middleware support, structured logs written through a PSR-3 compliant Monolog stack.</p>
+      </div>
+      <div class="flex flex-wrap gap-1.5 mt-auto">
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-amber-50 border-amber-200 text-amber-700 dark:bg-amber-950/40 dark:border-amber-800/50 dark:text-amber-400">guzzlehttp/guzzle</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-amber-50 border-amber-200 text-amber-700 dark:bg-amber-950/40 dark:border-amber-800/50 dark:text-amber-400">monolog/monolog</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-amber-50 border-amber-200 text-amber-700 dark:bg-amber-950/40 dark:border-amber-800/50 dark:text-amber-400">psr/log</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-amber-50 border-amber-200 text-amber-700 dark:bg-amber-950/40 dark:border-amber-800/50 dark:text-amber-400">Log.php</span>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-blue-50 dark:bg-blue-950/50">📁</div>
+      <div>
+        <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Filesystem &amp; Assets</p>
+        <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">Filesystem operations and file discovery through Symfony Filesystem/Finder, with accurate MIME detection for uploads.</p>
+      </div>
+      <div class="flex flex-wrap gap-1.5 mt-auto">
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">symfony/filesystem</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">symfony/finder</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950/40 dark:border-blue-800/50 dark:text-blue-400">league/mime-type-detection</span>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-emerald-50 dark:bg-emerald-950/50">🌍</div>
+      <div>
+        <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Config, Env &amp; i18n</p>
+        <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">.env loading through phpdotenv, per-domain config files, and translation catalogs for multi-language responses.</p>
+      </div>
+      <div class="flex flex-wrap gap-1.5 mt-auto">
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">vlucas/phpdotenv</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">symfony/translation</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">Environment.php</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:border-emerald-800/50 dark:text-emerald-400">Config.php</span>
+      </div>
+    </div>
+
+    <div class="bg-white dark:bg-[#161B22] p-6 flex flex-col gap-3 hover:bg-slate-50 dark:hover:bg-[#1C2128] transition-colors">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center text-base bg-red-50 dark:bg-red-950/50">🧩</div>
+      <div>
+        <p class="font-mono font-bold text-[0.88rem] text-slate-900 dark:text-slate-100 mb-1">Container &amp; Events</p>
+        <p class="text-[0.8rem] text-slate-500 dark:text-slate-400 leading-relaxed">A PSR-11 compliant service container plus an Illuminate-backed event dispatcher for decoupled, listener-driven flows.</p>
+      </div>
+      <div class="flex flex-wrap gap-1.5 mt-auto">
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-red-50 border-red-200 text-red-600 dark:bg-red-950/40 dark:border-red-800/50 dark:text-red-400">psr/container</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-red-50 border-red-200 text-red-600 dark:bg-red-950/40 dark:border-red-800/50 dark:text-red-400">illuminate/events</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-red-50 border-red-200 text-red-600 dark:bg-red-950/40 dark:border-red-800/50 dark:text-red-400">Container.php</span>
+        <span class="font-mono text-[0.63rem] px-1.5 py-0.5 rounded border bg-red-50 border-red-200 text-red-600 dark:bg-red-950/40 dark:border-red-800/50 dark:text-red-400">EventDispatcher.php</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="border-slate-100 dark:border-slate-800">
+
+<!-- DEPENDENCIES -->
+<section class="max-w-5xl mx-auto px-6 py-20" id="dependencies">
+
+  <p class="font-mono text-[0.7rem] uppercase tracking-widest text-violet-500 dark:text-violet-400 mb-2">// composer.json</p>
+  <h2 class="font-mono font-bold text-2xl sm:text-3xl text-slate-900 dark:text-slate-50 mb-3">Dependencies</h2>
+  <p class="text-sm text-slate-500 dark:text-slate-400 max-w-lg mb-10">
+    Every package pulled in on purpose — no dead weight, each one backs a module above.
+  </p>
+
+  <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800">
+    <div class="flex items-center gap-2 px-4 py-3 bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+      <span class="w-3 h-3 rounded-full bg-red-400"></span>
+      <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+      <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+      <span class="ml-2 font-mono text-[0.7rem] text-slate-400 dark:text-slate-500">composer.json / require</span>
+    </div>
+    <div class="bg-white dark:bg-[#161B22] px-6 py-5 font-mono text-[0.75rem] leading-7 overflow-x-auto">
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"php"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"^8.2"</span><span class="text-slate-300 dark:text-slate-700">, // Minimum PHP runtime</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"vlucas/phpdotenv"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"*"</span><span class="text-slate-300 dark:text-slate-700">, // .env loading</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"monolog/monolog"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"^3.9"</span><span class="text-slate-300 dark:text-slate-700">, // PSR-3 structured logging</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"guzzlehttp/guzzle"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"*"</span><span class="text-slate-300 dark:text-slate-700">, // Outbound HTTP client</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"symfony/var-dumper"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"*"</span><span class="text-slate-300 dark:text-slate-700">, // Debug dumping</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"symfony/http-foundation"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"^7.3"</span><span class="text-slate-300 dark:text-slate-700">, // Request / Response abstraction</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"psr/container"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"^2.0"</span><span class="text-slate-300 dark:text-slate-700">, // Service container interface</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"psr/log"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"^3.0"</span><span class="text-slate-300 dark:text-slate-700">, // Logger interface</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"symfony/filesystem"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"6.0"</span><span class="text-slate-300 dark:text-slate-700">, // Filesystem operations</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"symfony/finder"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"6.0"</span><span class="text-slate-300 dark:text-slate-700">, // File discovery</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"league/mime-type-detection"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"1.11"</span><span class="text-slate-300 dark:text-slate-700">, // MIME detection for uploads</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"respect/validation"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"2.2"</span><span class="text-slate-300 dark:text-slate-700">, // Declarative validation rules</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"symfony/translation"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"6.0"</span><span class="text-slate-300 dark:text-slate-700">, // i18n / translation catalogs</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"egulias/email-validator"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"4.0"</span><span class="text-slate-300 dark:text-slate-700">, // RFC-compliant email validation</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"paragonie/constant_time_encoding"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"^2.7"</span><span class="text-slate-300 dark:text-slate-700">, // Timing-safe encoding</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"paragonie/halite"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"^5.1"</span><span class="text-slate-300 dark:text-slate-700">, // Libsodium-based encryption</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"defuse/php-encryption"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"2.4"</span><span class="text-slate-300 dark:text-slate-700">, // Authenticated symmetric encryption</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"web-token/jwt-library"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"3.3"</span><span class="text-slate-300 dark:text-slate-700">, // JWS / JWE / JWK toolchain</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"firebase/php-jwt"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"6.0"</span><span class="text-slate-300 dark:text-slate-700">, // Lightweight JWT encode/decode</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"psr/cache"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"3.0"</span><span class="text-slate-300 dark:text-slate-700">, // Cache pool interface</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"nesbot/carbon"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"^3.9"</span><span class="text-slate-300 dark:text-slate-700">, // Date &amp; time handling</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"illuminate/database"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"^12.18"</span><span class="text-slate-300 dark:text-slate-700">, // Eloquent ORM &amp; schema builder</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"paragonie/hidden-string"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"^2.2"</span><span class="text-slate-300 dark:text-slate-700">, // Prevent secrets leaking in dumps/logs</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"symfony/security-csrf"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"^7.3"</span><span class="text-slate-300 dark:text-slate-700">, // CSRF token management</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"illuminate/pagination"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"^12.18"</span><span class="text-slate-300 dark:text-slate-700">, // Query result pagination</span></div>
+      <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5"><span class="text-emerald-600 dark:text-emerald-400">"illuminate/events"</span><span class="text-slate-300 dark:text-slate-700">:</span><span class="text-amber-600 dark:text-amber-400">"^12.18"</span><span class="text-slate-300 dark:text-slate-700">, // Event dispatcher</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="border-slate-100 dark:border-slate-800">
+
+<!-- FEATURES -->
+<section id="features" class="max-w-5xl mx-auto px-6 py-20">
+
+  <p class="font-mono text-[0.7rem] uppercase tracking-widest text-violet-500 dark:text-violet-400 mb-2">// highlights</p>
+  <h2 class="font-mono font-bold text-2xl sm:text-3xl text-slate-900 dark:text-slate-50 mb-3">What's New in v2</h2>
+  <p class="text-sm text-slate-500 dark:text-slate-400 max-w-lg mb-10">
+    Same lightweight philosophy, now standing on well-maintained shoulders.
+  </p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="flex gap-3 items-start">
+      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center text-sm bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400">🧬</div>
+      <div>
+        <p class="font-mono font-semibold text-[0.82rem] text-slate-900 dark:text-slate-100 mb-0.5">Eloquent ORM</p>
+        <p class="text-[0.78rem] text-slate-500 dark:text-slate-400 leading-relaxed">Full model relationships, migrations and query builder from Illuminate Database.</p>
+      </div>
+    </div>
+    <div class="flex gap-3 items-start">
+      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center text-sm bg-violet-100 text-violet-600 dark:bg-violet-950/60 dark:text-violet-400">🪪</div>
+      <div>
+        <p class="font-mono font-semibold text-[0.82rem] text-slate-900 dark:text-slate-100 mb-0.5">JWT Authentication</p>
+        <p class="text-[0.78rem] text-slate-500 dark:text-slate-400 leading-relaxed">Issue and verify signed tokens for stateless auth and third-party APIs.</p>
+      </div>
+    </div>
+    <div class="flex gap-3 items-start">
+      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center text-sm bg-red-100 text-red-500 dark:bg-red-950/60 dark:text-red-400">🔐</div>
+      <div>
+        <p class="font-mono font-semibold text-[0.82rem] text-slate-900 dark:text-slate-100 mb-0.5">Libsodium Encryption</p>
+        <p class="text-[0.78rem] text-slate-500 dark:text-slate-400 leading-relaxed">Authenticated encryption via Halite, with legacy support through defuse/php-encryption.</p>
+      </div>
+    </div>
+    <div class="flex gap-3 items-start">
+      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center text-sm bg-blue-100 text-blue-500 dark:bg-blue-950/60 dark:text-blue-400">✅</div>
+      <div>
+        <p class="font-mono font-semibold text-[0.82rem] text-slate-900 dark:text-slate-100 mb-0.5">Rule-based Validation</p>
+        <p class="text-[0.78rem] text-slate-500 dark:text-slate-400 leading-relaxed">Fluent, composable validation chains instead of manual if/else checks.</p>
+      </div>
+    </div>
+    <div class="flex gap-3 items-start">
+      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center text-sm bg-amber-100 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400">📡</div>
+      <div>
+        <p class="font-mono font-semibold text-[0.82rem] text-slate-900 dark:text-slate-100 mb-0.5">Resilient HTTP Client</p>
+        <p class="text-[0.78rem] text-slate-500 dark:text-slate-400 leading-relaxed">Guzzle-backed outbound requests with middleware, retries and timeouts.</p>
+      </div>
+    </div>
+    <div class="flex gap-3 items-start">
+      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center text-sm bg-violet-100 text-violet-600 dark:bg-violet-950/60 dark:text-violet-400">📝</div>
+      <div>
+        <p class="font-mono font-semibold text-[0.82rem] text-slate-900 dark:text-slate-100 mb-0.5">PSR-3 Logging</p>
+        <p class="text-[0.78rem] text-slate-500 dark:text-slate-400 leading-relaxed">Monolog handlers routed to files, and any future log aggregator.</p>
+      </div>
+    </div>
+    <div class="flex gap-3 items-start">
+      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center text-sm bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400">🌍</div>
+      <div>
+        <p class="font-mono font-semibold text-[0.82rem] text-slate-900 dark:text-slate-100 mb-0.5">Multi-language Support</p>
+        <p class="text-[0.78rem] text-slate-500 dark:text-slate-400 leading-relaxed">Translation catalogs powered by Symfony Translation.</p>
+      </div>
+    </div>
+    <div class="flex gap-3 items-start">
+      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center text-sm bg-emerald-100 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400">🛡</div>
+      <div>
+        <p class="font-mono font-semibold text-[0.82rem] text-slate-900 dark:text-slate-100 mb-0.5">Framework-grade CSRF</p>
+        <p class="text-[0.78rem] text-slate-500 dark:text-slate-400 leading-relaxed">Token generation and validation delegated to Symfony Security CSRF.</p>
+      </div>
+    </div>
+    <div class="flex gap-3 items-start">
+      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center text-sm bg-amber-100 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400">📆</div>
+      <div>
+        <p class="font-mono font-semibold text-[0.82rem] text-slate-900 dark:text-slate-100 mb-0.5">Carbon Dates</p>
+        <p class="text-[0.78rem] text-slate-500 dark:text-slate-400 leading-relaxed">Human-friendly date manipulation across the Scheduler and Models.</p>
+      </div>
+    </div>
+    <div class="flex gap-3 items-start">
+      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center text-sm bg-red-100 text-red-500 dark:bg-red-950/60 dark:text-red-400">🧩</div>
+      <div>
+        <p class="font-mono font-semibold text-[0.82rem] text-slate-900 dark:text-slate-100 mb-0.5">Event Dispatcher</p>
+        <p class="text-[0.78rem] text-slate-500 dark:text-slate-400 leading-relaxed">Decoupled listeners via Illuminate Events for cross-module hooks.</p>
+      </div>
+    </div>
+    <div class="flex gap-3 items-start">
+      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center text-sm bg-blue-100 text-blue-500 dark:bg-blue-950/60 dark:text-blue-400">📂</div>
+      <div>
+        <p class="font-mono font-semibold text-[0.82rem] text-slate-900 dark:text-slate-100 mb-0.5">Robust Filesystem</p>
+        <p class="text-[0.78rem] text-slate-500 dark:text-slate-400 leading-relaxed">File discovery and manipulation via Symfony Filesystem &amp; Finder.</p>
+      </div>
+    </div>
+    <div class="flex gap-3 items-start">
+      <div class="flex-shrink-0 w-8 h-8 rounded-md flex items-center justify-center text-sm bg-violet-100 text-violet-600 dark:bg-violet-950/60 dark:text-violet-400">🐞</div>
+      <div>
+        <p class="font-mono font-semibold text-[0.82rem] text-slate-900 dark:text-slate-100 mb-0.5">Dev-time Debugging</p>
+        <p class="text-[0.78rem] text-slate-500 dark:text-slate-400 leading-relaxed">symfony/var-dumper for readable variable dumps during development.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="border-slate-100 dark:border-slate-800">
+
+<!-- FILE TREE -->
+<section class="max-w-5xl mx-auto px-6 py-20" id="structure">
+
+  <p class="font-mono text-[0.7rem] uppercase tracking-widest text-violet-500 dark:text-violet-400 mb-2">// file structure</p>
+  <h2 class="font-mono font-bold text-2xl sm:text-3xl text-slate-900 dark:text-slate-50 mb-3">Project Layout</h2>
+  <p class="text-sm text-slate-500 dark:text-slate-400 max-w-lg mb-10">
+    The same predictable convention, now with a <span class="font-mono text-[0.78rem]">vendor/</span> directory and a <span class="font-mono text-[0.78rem]">composer.json</span> at the root.
+  </p>
+
+  <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800">
+    <div class="flex items-center gap-2 px-4 py-3 bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+      <span class="w-3 h-3 rounded-full bg-red-400"></span>
+      <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+      <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+      <span class="ml-2 font-mono text-[0.7rem] text-slate-400 dark:text-slate-500">NM Base Framework v2 /</span>
+    </div>
+    <div class="bg-white dark:bg-[#161B22] px-6 py-5 font-mono text-[0.75rem] leading-7 overflow-x-auto">
+      <div class="flex items-center whitespace-nowrap"><span class="text-blue-600 dark:text-blue-400 font-bold">App/</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-emerald-600 dark:text-emerald-400">Controllers/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Application controllers</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-emerald-600 dark:text-emerald-400">Models/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Illuminate Eloquent models</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;└──</span><span class="text-emerald-600 dark:text-emerald-400">database/migrations · seeders</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Schema &amp; seed data</span></div>
+
+      <div class="flex items-center whitespace-nowrap mt-2"><span class="text-blue-600 dark:text-blue-400 font-bold">config/</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-violet-500 dark:text-violet-400">.env</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Loaded via vlucas/phpdotenv</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;└──</span><span class="text-violet-500 dark:text-violet-400">app.php · database.php · mailer.php</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Domain config files</span></div>
+
+      <div class="flex items-center whitespace-nowrap mt-2"><span class="text-blue-600 dark:text-blue-400 font-bold">Core/</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-blue-500 dark:text-blue-400">Authentication/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Auth, email verify, password reset</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-blue-500 dark:text-blue-400">Database/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ ORM, Migrator, BaseModel (Eloquent)</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-blue-500 dark:text-blue-400">Events/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ EventDispatcher (illuminate/events)</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-blue-500 dark:text-blue-400">Foundation/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ App, Bootstrap, Container (psr/container)</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-blue-500 dark:text-blue-400">Http/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Request, Response (symfony/http-foundation)</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-blue-500 dark:text-blue-400">Middleware/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Ajax, EmailVerified, Throttle</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-blue-500 dark:text-blue-400">Routing/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Router, Route, RouteCompiler</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-blue-500 dark:text-blue-400">Security/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ CSRF, Crypto, Encryption, JWT, keys/</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-blue-500 dark:text-blue-400">Services/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Captcha, Sitemap, Libraries/</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-blue-500 dark:text-blue-400">System/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Config, Environment, Log, SessionManager</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;└──</span><span class="text-blue-500 dark:text-blue-400">ViewEngine/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Section-based template engine</span></div>
+
+      <div class="flex items-center whitespace-nowrap mt-2"><span class="text-blue-600 dark:text-blue-400 font-bold">public/</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-emerald-600 dark:text-emerald-400">index.php</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Application entry point</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;└──</span><span class="text-blue-500 dark:text-blue-400">assets/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ images · scripts · styles</span></div>
+
+      <div class="flex items-center whitespace-nowrap mt-2"><span class="text-blue-600 dark:text-blue-400 font-bold">resources/</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-blue-500 dark:text-blue-400">assets/layouts · partials · views</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Templates &amp; layouts</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;└──</span><span class="text-blue-500 dark:text-blue-400">files/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ robots.txt, sitemap.xml</span></div>
+
+      <div class="flex items-center whitespace-nowrap mt-2"><span class="text-blue-600 dark:text-blue-400 font-bold">routes/</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;└──</span><span class="text-emerald-600 dark:text-emerald-400">web.php</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Route definitions</span></div>
+
+      <div class="flex items-center whitespace-nowrap mt-2"><span class="text-blue-600 dark:text-blue-400 font-bold">storage/</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-slate-400 dark:text-slate-500">framework/ · cache/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Runtime &amp; cache pools (psr/cache)</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;├──</span><span class="text-slate-400 dark:text-slate-500">logs/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Monolog output</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">│&nbsp;&nbsp;└──</span><span class="text-slate-400 dark:text-slate-500">uploads/</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ User-generated files</span></div>
+
+      <div class="flex items-center whitespace-nowrap mt-2"><span class="text-blue-600 dark:text-blue-400 font-bold">vendor/</span></div>
+      <div class="flex items-center gap-1 whitespace-nowrap"><span class="text-slate-300 dark:text-slate-700 select-none">&nbsp;&nbsp;&nbsp;└──</span><span class="text-slate-400 dark:text-slate-500">…</span>&nbsp;<span class="text-slate-300 dark:text-slate-700">→ Composer-managed dependencies</span></div>
+
+      <div class="flex items-center whitespace-nowrap mt-2"><span class="text-blue-600 dark:text-blue-400 font-bold">composer.json</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="border-slate-100 dark:border-slate-800">
+
+<!-- CTA / LINKS BANNER -->
+<section class="max-w-5xl mx-auto px-6 py-16 flex flex-col sm:flex-row items-center justify-between gap-6">
+  <div>
+    <p class="font-mono font-bold text-lg text-slate-900 dark:text-slate-100">Ready to upgrade?</p>
+    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Run <span class="font-mono">composer install</span> and you're set.</p>
+  </div>
+  <div class="flex flex-wrap gap-3">
+    <a href="https://github.com/nooreddinemaiza/nm-base-framework-v2" target="_blank" rel="noopener"
+       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-md font-mono text-[0.82rem] font-medium bg-slate-900 text-white hover:bg-slate-700 transition-colors dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white">
+      <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      View on GitHub
+    </a>
+  </div>
+</section>
+
+<hr class="border-slate-100 dark:border-slate-800">
+
+<!-- FOOTER -->
+<footer class="flex flex-col items-center gap-5 px-6 pt-8 pb-6 border-t border-slate-100 dark:border-slate-800">
+  <span class="text-xs text-slate-400 dark:text-slate-500 text-center">
+    <a href="https://nooreddinemaiza.github.io" target="_blank" rel="noopener noreferrer" class="text-violet-500 dark:text-violet-400 font-medium hover:underline">NM</a>
+    &copy; 2026
+  </span>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+</body>
+</html>
